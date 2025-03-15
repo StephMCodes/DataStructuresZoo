@@ -3,11 +3,14 @@
 
 #include <iostream>
 #include <string>
+#include "ShowInfo.h"
+#include "Ticket.h"
 
 int main()
 {
    //this is for the zoo
-	std::cout << "Hello World!\n";
+	std::cout << "Welcome to the Zoo!\n";
+	
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
