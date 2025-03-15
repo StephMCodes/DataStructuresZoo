@@ -9,36 +9,39 @@ protected: //encapsulation
 	//Ticket (VIP, family, classic) <- add the price
 	std::string type;
 	int price;
+public:
+    std::string clientName;
+protected:
 	//constructor is protected so it is abstract
-	Ticket(const std::string& type, int price)
-		: type(type), price(price)
+	Ticket(const std::string& type, int price, std::string clientName)
+		: type(type), price(price), clientName(clientName)
 	{
 	}
 public: //a simple read-only displaying method that needs to be public so it can be used
 	void DisplayTicketInfo() const {
-		std::cout << "Ticket Type: " << type << "\nPrice: $" << price << std::endl;
+		std::cout << "Ticket Type: " << type << "\nPrice($): " << price << "\nName: " << clientName << std::endl;
 	}
 	
 };
 
 struct VIPTicket : Ticket
 {
-	VIPTicket() : Ticket("VIP Ticket", 100) {} // VIP costs $100 for full experience
+	VIPTicket() : Ticket("VIP Ticket", 100, "Name") {} // VIP costs $100 for full experience
 };
 
 struct FamilyTicket : Ticket
 {
-	FamilyTicket() : Ticket("Family Ticket", 50) {} // for family group
+	FamilyTicket() : Ticket("Family Ticket", 50, "Name") {} // for family group
 };
 
 struct StudentElderTicket : Ticket
 {
-	StudentElderTicket() : Ticket("Student/Elder Discount Ticket", 10) {} // student discount
+    StudentElderTicket() : Ticket("Student/Elder Discount Ticket", 10, "Name") {} // student discount
 };
 
 struct BasicTicket : Ticket
 {
-	BasicTicket() : Ticket("Basic Ticket", 20) {} // simple 20 dollar ticket
+	BasicTicket() : Ticket("Basic Ticket", 20, "Name") {} // simple 20 dollar ticket
 };
 
 struct TicketQueue {
