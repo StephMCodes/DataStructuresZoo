@@ -8,6 +8,8 @@
 
 int main()
 {
+	//create array of purchased tickets
+
    //this is for the zoo
 	std::cout << "Welcome to the Zoo!\n";
 	
