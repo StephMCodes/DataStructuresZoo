@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animals.cpp" />
     <ClCompile Include="DataStructuresZoo.cpp" />
     <ClCompile Include="ShowInfo.cpp" />
     <ClCompile Include="Ticket.cpp" />
