@@ -3,9 +3,20 @@
 #include <string>
 #include "ShowInfo.h"
 #include "Ticket.h"
+#include "Animals.cpp"
+#include <vector>
+using namespace std;
 
 int main()
 {
+	//Animal Vectors to keep track of the animals + add them dynamically
+	vector<Animal*> jungleAnimals;
+	vector<Animal*> desertAnimals;
+	vector<Animal*> forestAnimals;
+	vector<Animal*> arcticAnimals;
+	vector<Animal*> aquaticAnimals;
+
+
 	//use queue of purchased tickets
 	VIPTicket vip;
 	vip.clientName = "Ellen Rivers";
@@ -25,6 +36,9 @@ int main()
    //this is for the zoo
 	std::cout << "Welcome to the Zoo!\n";
 
+	//use the animals Test
+	AddAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
+	
 	
 	
 }
