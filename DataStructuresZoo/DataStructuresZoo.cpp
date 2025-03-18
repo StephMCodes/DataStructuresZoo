@@ -34,12 +34,13 @@ int main()
 	queue.DisplayZooReservations();
 
    //this is for the zoo
-	std::cout << "Welcome to the Zoo!\n";
+	cout << "Welcome to the Zoo!\n";
 
 	//use the animals Test
 	AddAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
+	DisplayAllAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
 	
-	
+	return 0;
 	
 }
 
