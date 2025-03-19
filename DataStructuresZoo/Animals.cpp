@@ -14,7 +14,7 @@ enum class Habitat
 };
 
 //Abstract class for the animals
-class Animal 
+class Animal
 {
 protected:
 	string speciesName;
@@ -35,7 +35,7 @@ public:
 	string GetDiet() const { return diet; }
 
 	//Function to return the habitat as a string
-	string HabitatString(Habitat habitat) const
+	static string HabitatString(Habitat habitat)
 	{
 		switch (habitat)
 		{
@@ -88,11 +88,12 @@ class Bird : public Animal
 private:
 	bool canFly;
 public:
-	Bird(const string& speciesName, Habitat habitat, const string& diet, const bool& canFly) 
+	Bird(const string& speciesName, Habitat habitat, const string& diet, bool canFly)
 	{
 		SetSpeciesName(speciesName);
 		SetHabitat(habitat);
 		SetDiet(diet);
+		SetCanFly(canFly);
 	}
 
 	//SETTERS
@@ -108,34 +109,74 @@ public:
 	{
 		this->habitat = habitat;
 	}
-	bool SetCanFly()
+	void SetCanFly(bool canFly)
 	{
-		char choice;
-		bool isValid = false;
-		do
-		{
-			cout << "Can this species fly? Y:yes N:no\n";
-			cin >> choice;
-
-			if (choice == 'Y' || choice == 'y')
-			{
-				this->canFly = true;
-				isValid = true;
-			}
-			else if (choice == 'N' || choice == 'n')
-			{
-				this->canFly = false;
-				isValid = true;
-			}
-			else
-			{
-				cout << "choice is invalid! Please Try Again:\n";
-			}
-		} while (choice);
-		return canFly;
+		this->canFly = canFly;
 	}
-	bool GetCanFly() { return canFly; }
-	
+	bool GetCanFly() const { return canFly; }
+
+};
+
+//Derived class for Fish
+class Fish : public Animal
+{
+private:
+	string predators;
+
+public:
+	Fish(const string& speciesName, Habitat habitat, const string& diet, const string& predators)
+	{
+		SetSpeciesName(speciesName);
+		SetHabitat(habitat);
+		SetDiet(diet);
+		SetPredators(predators);
+	}
+
+	//SETTERS
+	void SetSpeciesName(const string& speciesName) override
+	{
+		this->speciesName = speciesName;
+	}
+	void SetDiet(const string& diet)override
+	{
+		this->diet = diet;
+	}
+	void SetHabitat(Habitat habitat)override
+	{
+		this->habitat = habitat;
+	}
+	string SetPredators(const string& predators)
+	{
+		int amount;
+		string predatorsString = "";
+		vector<string> Predators;
+
+		cout << "How many predators would you like to add to this list? ";
+		cin >> amount;
+
+		for (int i = 0; i < amount; i++)
+		{
+			string predator;
+			cout << "Enter name of predator " << i + 1 << ": ";
+			cin >> predator;
+			Predators.push_back(predator);
+		}
+
+		for (const auto& predator : Predators)
+		{
+			predatorsString += predator + ", ";
+		}
+
+		if (!predatorsString.empty())
+		{
+			predatorsString.pop_back(); // Remove the last comma
+			predatorsString.pop_back(); // Remove the space after the last comma
+			predatorsString += ".";
+		}
+
+		return predatorsString;
+	}
+	string GetPredators() { return predators; }
 };
 
 //Clears Animals for the dynamically allocated memory
@@ -152,10 +193,10 @@ static void ClearAnimals(vector<Animal*>& animals)
 static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
 	//Variables for the animal
-	string speciesName, diet;
+	string speciesName, diet, predators;
 	Habitat habitat;
 	Animal* newAnimal = nullptr;
-	
+
 	//User input for the animal
 	bool canFly;
 	int habitatChoice;
@@ -164,7 +205,7 @@ static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 	//User input
 	cout << "Enter the speciesName of the animal: ";
 	cin >> speciesName;
-	cout << "Enter the diet of the animal: ";
+	cout << "Enter the diet of the animal: " << endl;
 	cin >> diet;
 	cout << "Enter the habitat of the animal (0:Jungle, 1:Desert, 2:Forest, 3:Arctic, 4:Aquatic): ";
 	cin >> habitatChoice;
@@ -194,6 +235,21 @@ static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 	cout << "Which Type of Animal? (0:Mammal, 1:Bird, 2:Fish): ";
 	cin >> speciesChoice;
 
+	if (speciesChoice == 1)
+	{
+		char choice;
+
+		cout << "Can this bird fly? (Y:yes, N:no): ";
+		cin >> choice;
+
+		while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
+		{
+			cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no: ";
+			cin >> choice;
+		}
+		canFly = (choice == 'Y' || choice == 'y');
+
+	}
 	//Switch statement to add the animal to the correct habitat -- Will be updated with more derived classes!
 	switch (speciesChoice)
 	{
@@ -203,11 +259,10 @@ static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 		break;
 	case 1:
 		newAnimal = new Bird(speciesName, habitat, diet, canFly);
-		canFly = dynamic_cast<Bird*>(newAnimal)->SetCanFly();
 		jungleAnimals.push_back(newAnimal);
 		break;
 	case 2:
-		//newAnimal = new Fish(speciesName, habitat, diet);
+		//newAnimal = new Fish(speciesName, habitat, diet, predators);
 		//jungleAnimals.push_back(newAnimal);
 		break;
 	default:
@@ -219,7 +274,7 @@ static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 	{
 		cout << speciesName << " was added to the " << newAnimal->GetHabitat() << " habitat!" << endl;
 	}
-	
+
 	//THIS NEEDS TO BE DONE WHEN THE CONSOLE CLOSES!
 	//Clear the memory for all -- just to be safe!
 	//ClearAnimals(jungleAnimals);
@@ -232,8 +287,8 @@ static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 static void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
 
-	cout << "Jungle Biome:";
-	cout << "--------------";
+	cout << "Jungle Biome:\n" << endl;
+	cout << "--------------\n" << endl;
 	for (const auto& animal : jungleAnimals)
 	{
 		cout << "Species Name: " << animal->GetSpeciesName() << endl;
@@ -242,6 +297,11 @@ static void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& d
 		if (Bird* bird = dynamic_cast<Bird*>(animal))
 		{
 			cout << "Can Fly: " << (bird->GetCanFly() ? "Yes" : "No") << endl;
+		}
+		if (Fish* fish = dynamic_cast<Fish*>(animal))
+		{
+			cout << "Predators: " << (fish->GetPredators()) << endl;
+
 		}
 	}
 };
