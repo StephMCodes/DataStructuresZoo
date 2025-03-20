@@ -3,7 +3,9 @@
 #include <string>
 #include "ShowInfo.h"
 #include "Ticket.h"
-#include "Animals.cpp"
+#include "Animals.h"
+#include "Mammal.h"
+#include "IFly.h"
 #include <vector>
 using namespace std;
 

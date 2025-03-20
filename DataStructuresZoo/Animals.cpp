@@ -1,108 +1,28 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "IFly.h"
+#include "Animals.h"
+#include "Mammal.h"
 using namespace std;
 
-//Enumeration for the habitat of the animals
-enum class Habitat
+string Animal::HabitatString(Habitat habitat)
 {
-	Jungle,
-	Desert,
-	Forest,
-	Arctic,
-	Aquatic
-};
-
-class IFly
-{
-public:
-	virtual bool CanFly() const = 0;
-	virtual void SetCanFly(bool canFly) = 0;
-};
-
-//Abstract class for the animals
-class Animal
-{
-protected:
-	string speciesName;
-	Habitat habitat; // No initialization
-	string diet;
-
-public:
-	virtual ~Animal() = default; //C;earanimals }; //destructor
-
-	//SETTERS
-	virtual void SetSpeciesName(const string& speciesName) = 0;
-	virtual void SetHabitat(const Habitat habitat) = 0;
-	virtual void SetDiet(const string& diet) = 0;
-
-	//GETTERS
-	string GetSpeciesName() const { return speciesName; }
-	string GetHabitat() const { return HabitatString(habitat); }
-	string GetDiet() const { return diet; }
-
-	//Function to return the habitat as a string
-	static string HabitatString(Habitat habitat)
+	switch (habitat)
 	{
-		switch (habitat)
-		{
-		case Habitat::Jungle:
-			return "Jungle";
-		case Habitat::Desert:
-			return "Desert";
-		case Habitat::Forest:
-			return "Forest";
-		case Habitat::Arctic:
-			return "Arctic";
-		case Habitat::Aquatic:
-			return "Aquatic";
-		default:
-			return "Selection Invalid!";
-		}
-	};
-};
-
-//Derived class for the Mammals
-class Mammal : public Animal, public IFly
-{
-private:
-	bool canFly;
-	bool isFlyingMammal;
-public:
-	//Constructor
-	Mammal(const string& speciesName, Habitat habitat, const string& diet, bool isFlyingMammal = false, bool canFly = false)
-	{
-		SetSpeciesName(speciesName);
-		SetHabitat(habitat);
-		SetDiet(diet);
-		this->isFlyingMammal = isFlyingMammal;
-		if (isFlyingMammal)
-		{
-			SetCanFly(canFly);
-		}
+	case Habitat::Jungle:
+		return "Jungle";
+	case Habitat::Desert:
+		return "Desert";
+	case Habitat::Forest:
+		return "Forest";
+	case Habitat::Arctic:
+		return "Arctic";
+	case Habitat::Aquatic:
+		return "Aquatic";
+	default:
+		return "Selection Invalid!";
 	}
-
-	//SETTERS
-	void SetDiet(const string& diet) override
-	{
-		this->diet = diet;
-	}
-	void SetSpeciesName(const string& speciesName) override
-	{
-		this->speciesName = speciesName;
-	}
-	void SetHabitat(Habitat habitat) override
-	{
-		this->habitat = habitat;
-	}
-	void SetCanFly(bool canFly) override
-	{
-		if (isFlyingMammal)
-		{
-			this->canFly = canFly;
-		}
-	}
-	bool CanFly() const override { return canFly; }
 };
 
 //Derived class for the Birds
@@ -142,66 +62,66 @@ public:
 };
 
 //Derived class for Fish
-class Fish : public Animal
-{
-private:
-	string predators;
-
-public:
-	Fish(const string& speciesName, Habitat habitat, const string& diet, const string& predators)
-	{
-		SetSpeciesName(speciesName);
-		SetHabitat(habitat);
-		SetDiet(diet);
-		SetPredators(predators);
-	}
-
-	//SETTERS
-	void SetSpeciesName(const string& speciesName) override
-	{
-		this->speciesName = speciesName;
-	}
-	void SetDiet(const string& diet)override
-	{
-		this->diet = diet;
-	}
-	void SetHabitat(Habitat habitat)override
-	{
-		this->habitat = habitat;
-	}
-	string SetPredators(const string& predators)
-	{
-		int amount;
-		string predatorsString = "";
-		vector<string> Predators;
-
-		cout << "How many predators would you like to add to this list? ";
-		cin >> amount;
-
-		for (int i = 0; i < amount; i++)
-		{
-			string predator;
-			cout << "Enter name of predator " << i + 1 << ": ";
-			cin >> predator;
-			Predators.push_back(predator);
-		}
-
-		for (const auto& predator : Predators)
-		{
-			predatorsString += predator + ", ";
-		}
-
-		if (!predatorsString.empty())
-		{
-			predatorsString.pop_back(); // Remove the last comma
-			predatorsString.pop_back(); // Remove the space after the last comma
-			predatorsString += ".";
-		}
-
-		return predatorsString;
-	}
-	string GetPredators() { return predators; }
-};
+//class Fish : public Animal
+//{
+//private:
+//	string predators;
+//
+//public:
+//	Fish(const string& speciesName, Habitat habitat, const string& diet, const string& predators)
+//	{
+//		SetSpeciesName(speciesName);
+//		SetHabitat(habitat);
+//		SetDiet(diet);
+//		SetPredators(predators);
+//	}
+//
+//	//SETTERS
+//	void SetSpeciesName(const string& speciesName) override
+//	{
+//		this->speciesName = speciesName;
+//	}
+//	void SetDiet(const string& diet)override
+//	{
+//		this->diet = diet;
+//	}
+//	void SetHabitat(Habitat habitat)override
+//	{
+//		this->habitat = habitat;
+//	}
+//	string SetPredators(const string& predators)
+//	{
+//		int amount;
+//		string predatorsString = "";
+//		vector<string> Predators;
+//
+//		cout << "How many predators would you like to add to this list? ";
+//		cin >> amount;
+//
+//		for (int i = 0; i < amount; i++)
+//		{
+//			string predator;
+//			cout << "Enter name of predator " << i + 1 << ": ";
+//			cin >> predator;
+//			Predators.push_back(predator);
+//		}
+//
+//		for (const auto& predator : Predators)
+//		{
+//			predatorsString += predator + ", ";
+//		}
+//
+//		if (!predatorsString.empty())
+//		{
+//			predatorsString.pop_back(); // Remove the last comma
+//			predatorsString.pop_back(); // Remove the space after the last comma
+//			predatorsString += ".";
+//		}
+//
+//		return predatorsString;
+//	}
+//	string GetPredators() { return predators; }
+//};
 
 //Clears Animals for the dynamically allocated memory
 static void ClearAnimals(vector<Animal*>& animals)
@@ -214,7 +134,7 @@ static void ClearAnimals(vector<Animal*>& animals)
 };
 
 //Function to add animals to the zoo -- Can be called in the DataStructuresZoo.cpp file
-static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
+void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
 	//Variables for the animal
 	string speciesName, diet, predators;
@@ -331,9 +251,9 @@ static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 	//ClearAnimals(forestAnimals);
 	//ClearAnimals(arcticAnimals);
 	//ClearAnimals(aquaticAnimals);
-};
+}
 
-static void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
+void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
 
 	cout << "Jungle Biome:\n" << endl;
@@ -347,11 +267,7 @@ static void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& d
 		{
 			cout << "Can Fly: " << (flyingAnimal->CanFly() ? "Yes" : "No") << endl;
 		}
-		if (Fish* fish = dynamic_cast<Fish*>(animal))
-		{
-			cout << "Predators: " << (fish->GetPredators()) << endl;
-
-		}
+		
 	}
-};
+}
 

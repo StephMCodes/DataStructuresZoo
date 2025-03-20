@@ -129,10 +129,14 @@
   <ItemGroup>
     <ClCompile Include="Animals.cpp" />
     <ClCompile Include="DataStructuresZoo.cpp" />
+    <ClCompile Include="Mammal.cpp" />
     <ClCompile Include="ShowInfo.cpp" />
     <ClCompile Include="Ticket.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animals.h" />
+    <ClInclude Include="IFly.h" />
+    <ClInclude Include="Mammal.h" />
     <ClInclude Include="ShowInfo.h" />
     <ClInclude Include="Ticket.h" />
   </ItemGroup>

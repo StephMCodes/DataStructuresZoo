@@ -27,12 +27,24 @@
     <ClCompile Include="Animals.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mammal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShowInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Ticket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IFly.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mammal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
