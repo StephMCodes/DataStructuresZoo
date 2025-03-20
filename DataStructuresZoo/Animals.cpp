@@ -13,6 +13,13 @@ enum class Habitat
 	Aquatic
 };
 
+class IFly
+{
+public:
+	virtual bool CanFly() const = 0;
+	virtual void SetCanFly(bool canFly) = 0;
+};
+
 //Abstract class for the animals
 class Animal
 {
@@ -22,7 +29,7 @@ protected:
 	string diet;
 
 public:
-	virtual ~Animal() = default; //destructor
+	virtual ~Animal() = default; //C;earanimals }; //destructor
 
 	//SETTERS
 	virtual void SetSpeciesName(const string& speciesName) = 0;
@@ -56,15 +63,23 @@ public:
 };
 
 //Derived class for the Mammals
-class Mammal : public Animal
+class Mammal : public Animal, public IFly
 {
+private:
+	bool canFly;
+	bool isFlyingMammal;
 public:
 	//Constructor
-	Mammal(const string& speciesName, Habitat habitat, const string& diet)
+	Mammal(const string& speciesName, Habitat habitat, const string& diet, bool isFlyingMammal = false, bool canFly = false)
 	{
 		SetSpeciesName(speciesName);
 		SetHabitat(habitat);
 		SetDiet(diet);
+		this->isFlyingMammal = isFlyingMammal;
+		if (isFlyingMammal)
+		{
+			SetCanFly(canFly);
+		}
 	}
 
 	//SETTERS
@@ -80,10 +95,18 @@ public:
 	{
 		this->habitat = habitat;
 	}
+	void SetCanFly(bool canFly) override
+	{
+		if (isFlyingMammal)
+		{
+			this->canFly = canFly;
+		}
+	}
+	bool CanFly() const override { return canFly; }
 };
 
 //Derived class for the Birds
-class Bird : public Animal
+class Bird : public Animal, public IFly
 {
 private:
 	bool canFly;
@@ -109,11 +132,12 @@ public:
 	{
 		this->habitat = habitat;
 	}
-	void SetCanFly(bool canFly)
+	void SetCanFly(bool canFly) override
 	{
 		this->canFly = canFly;
 	}
-	bool GetCanFly() const { return canFly; }
+	bool CanFly() const override { return canFly; }
+
 
 };
 
@@ -198,7 +222,8 @@ static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 	Animal* newAnimal = nullptr;
 
 	//User input for the animal
-	bool canFly;
+	bool canFly = false;
+	bool isFlyingMammal = false;
 	int habitatChoice;
 	int speciesChoice;
 
@@ -235,11 +260,39 @@ static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 	cout << "Which Type of Animal? (0:Mammal, 1:Bird, 2:Fish): ";
 	cin >> speciesChoice;
 
-	if (speciesChoice == 1)
+	if (speciesChoice == 0)
 	{
 		char choice;
 
-		cout << "Can this bird fly? (Y:yes, N:no): ";
+		cout << "Is this a flying mammal? (Y: yes, N: no): ";
+		cin >> choice;
+
+		while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
+		{
+			cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no: ";
+			cin >> choice;
+		}
+		isFlyingMammal = (choice == 'Y' || choice == 'y');
+
+		if (isFlyingMammal)
+		{
+			cout << "Can this animal fly? (Y:yes, N:no): ";
+			cin >> choice;
+
+			while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
+			{
+				cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no: ";
+				cin >> choice;
+			}
+			canFly = (choice == 'Y' || choice == 'y');
+		}
+
+	}
+	else if (speciesChoice == 1)
+	{
+		char choice;
+
+		cout << "Can this animal fly? (Y:yes, N:no): ";
 		cin >> choice;
 
 		while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
@@ -294,9 +347,9 @@ static void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& d
 		cout << "Species Name: " << animal->GetSpeciesName() << endl;
 		cout << "Habitat: " << animal->GetHabitat() << endl;
 		cout << "Diet: " << animal->GetDiet() << endl;
-		if (Bird* bird = dynamic_cast<Bird*>(animal))
+		if (IFly* flyingAnimal = dynamic_cast<IFly*>(animal))
 		{
-			cout << "Can Fly: " << (bird->GetCanFly() ? "Yes" : "No") << endl;
+			cout << "Can Fly: " << (flyingAnimal->CanFly() ? "Yes" : "No") << endl;
 		}
 		if (Fish* fish = dynamic_cast<Fish*>(animal))
 		{
