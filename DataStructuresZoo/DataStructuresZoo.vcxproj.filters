@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\AnimalHeaderFiles">
+      <UniqueIdentifier>{9ca72aca-831b-4433-8a1d-1d2165e18210}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataStructuresZoo.cpp">
@@ -27,6 +30,15 @@
     <ClCompile Include="Animals.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mammal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bird.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Fish.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShowInfo.h">
@@ -34,6 +46,21 @@
     </ClInclude>
     <ClInclude Include="Ticket.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animals.h">
+      <Filter>Header Files\AnimalHeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Bird.h">
+      <Filter>Header Files\AnimalHeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="IFly.h">
+      <Filter>Header Files\AnimalHeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Mammal.h">
+      <Filter>Header Files\AnimalHeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Fish.h">
+      <Filter>Header Files\AnimalHeaderFiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
