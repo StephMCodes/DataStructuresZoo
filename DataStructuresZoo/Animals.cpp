@@ -4,6 +4,8 @@
 #include "IFly.h"
 #include "Animals.h"
 #include "Mammal.h"
+#include "Bird.h"
+
 using namespace std;
 
 string Animal::HabitatString(Habitat habitat)
@@ -24,105 +26,6 @@ string Animal::HabitatString(Habitat habitat)
 		return "Selection Invalid!";
 	}
 };
-
-//Derived class for the Birds
-class Bird : public Animal, public IFly
-{
-private:
-	bool canFly;
-public:
-	Bird(const string& speciesName, Habitat habitat, const string& diet, bool canFly)
-	{
-		SetSpeciesName(speciesName);
-		SetHabitat(habitat);
-		SetDiet(diet);
-		SetCanFly(canFly);
-	}
-
-	//SETTERS
-	void SetDiet(const string& diet) override
-	{
-		this->diet = diet;
-	}
-	void SetSpeciesName(const string& speciesName) override
-	{
-		this->speciesName = speciesName;
-	}
-	void SetHabitat(Habitat habitat) override
-	{
-		this->habitat = habitat;
-	}
-	void SetCanFly(bool canFly) override
-	{
-		this->canFly = canFly;
-	}
-	bool CanFly() const override { return canFly; }
-
-
-};
-
-//Derived class for Fish
-//class Fish : public Animal
-//{
-//private:
-//	string predators;
-//
-//public:
-//	Fish(const string& speciesName, Habitat habitat, const string& diet, const string& predators)
-//	{
-//		SetSpeciesName(speciesName);
-//		SetHabitat(habitat);
-//		SetDiet(diet);
-//		SetPredators(predators);
-//	}
-//
-//	//SETTERS
-//	void SetSpeciesName(const string& speciesName) override
-//	{
-//		this->speciesName = speciesName;
-//	}
-//	void SetDiet(const string& diet)override
-//	{
-//		this->diet = diet;
-//	}
-//	void SetHabitat(Habitat habitat)override
-//	{
-//		this->habitat = habitat;
-//	}
-//	string SetPredators(const string& predators)
-//	{
-//		int amount;
-//		string predatorsString = "";
-//		vector<string> Predators;
-//
-//		cout << "How many predators would you like to add to this list? ";
-//		cin >> amount;
-//
-//		for (int i = 0; i < amount; i++)
-//		{
-//			string predator;
-//			cout << "Enter name of predator " << i + 1 << ": ";
-//			cin >> predator;
-//			Predators.push_back(predator);
-//		}
-//
-//		for (const auto& predator : Predators)
-//		{
-//			predatorsString += predator + ", ";
-//		}
-//
-//		if (!predatorsString.empty())
-//		{
-//			predatorsString.pop_back(); // Remove the last comma
-//			predatorsString.pop_back(); // Remove the space after the last comma
-//			predatorsString += ".";
-//		}
-//
-//		return predatorsString;
-//	}
-//	string GetPredators() { return predators; }
-//};
-
 //Clears Animals for the dynamically allocated memory
 static void ClearAnimals(vector<Animal*>& animals)
 {
