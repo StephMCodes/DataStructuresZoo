@@ -5,6 +5,7 @@
 #include "Animals.h"
 #include "Mammal.h"
 #include "Bird.h"
+#include "Fish.h"
 
 using namespace std;
 
@@ -40,13 +41,16 @@ static void ClearAnimals(vector<Animal*>& animals)
 void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
 	//Variables for the animal
-	string speciesName, diet, predators;
+	string speciesName, diet;
 	Habitat habitat;
+	WaterType waterType;
 	Animal* newAnimal = nullptr;
 
 	//User input for the animal
 	bool canFly = false;
 	bool isFlyingMammal = false;
+
+	int waterTypeChoice;
 	int habitatChoice;
 	int speciesChoice;
 
@@ -134,8 +138,24 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 		jungleAnimals.push_back(newAnimal);
 		break;
 	case 2:
-		//newAnimal = new Fish(speciesName, habitat, diet, predators);
-		//jungleAnimals.push_back(newAnimal);
+		cout << "Enter the Water Type of the fish (0:Freshwater, 1:Saltwater): ";
+		cin >> waterTypeChoice;
+		cin.ignore();
+
+		switch (waterTypeChoice)
+		{
+		case 0:
+			waterType = WaterType::FreshWater;
+			break;
+		case 1:
+			waterType = WaterType::SaltWater;
+			break;
+		default:
+			cout << "Invalid choice!" << endl;
+			return; // Exit the function if the choice is invalid
+		}
+		newAnimal = new Fish(speciesName, habitat, diet, waterType);
+		jungleAnimals.push_back(newAnimal);
 		break;
 	default:
 		cout << "Invalid species choice!" << endl;
@@ -169,6 +189,10 @@ void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 		if (IFly* flyingAnimal = dynamic_cast<IFly*>(animal))
 		{
 			cout << "Can Fly: " << (flyingAnimal->CanFly() ? "Yes" : "No") << endl;
+		}
+		else if (Fish* fish = dynamic_cast<Fish*>(animal))
+		{
+			cout << animal->GetSpeciesName() << " live in " << fish->GetWaterType() << endl;
 		}
 		
 	}

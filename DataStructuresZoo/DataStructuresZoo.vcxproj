@@ -130,6 +130,7 @@
     <ClCompile Include="Animals.cpp" />
     <ClCompile Include="Bird.cpp" />
     <ClCompile Include="DataStructuresZoo.cpp" />
+    <ClCompile Include="Fish.cpp" />
     <ClCompile Include="Mammal.cpp" />
     <ClCompile Include="ShowInfo.cpp" />
     <ClCompile Include="Ticket.cpp" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="Animals.h" />
     <ClInclude Include="Bird.h" />
+    <ClInclude Include="Fish.h" />
     <ClInclude Include="IFly.h" />
     <ClInclude Include="Mammal.h" />
     <ClInclude Include="ShowInfo.h" />
