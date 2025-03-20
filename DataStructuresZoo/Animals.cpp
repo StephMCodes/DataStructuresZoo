@@ -230,10 +230,15 @@ static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 	//User input
 	cout << "Enter the speciesName of the animal: ";
 	cin >> speciesName;
-	cout << "Enter the diet of the animal: " << endl;
+	cin.ignore();
+
+	cout << "Enter the diet of the animal: ";
 	cin >> diet;
+	cin.ignore();
+
 	cout << "Enter the habitat of the animal (0:Jungle, 1:Desert, 2:Forest, 3:Arctic, 4:Aquatic): ";
 	cin >> habitatChoice;
+	cin.ignore();
 
 	switch (habitatChoice)
 	{
@@ -259,58 +264,49 @@ static void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 
 	cout << "Which Type of Animal? (0:Mammal, 1:Bird, 2:Fish): ";
 	cin >> speciesChoice;
+	cin.ignore();
 
-	if (speciesChoice == 0)
+	char choice; 
+
+	//Switch statement to add the animal to the correct habitat -- Will be updated with more derived classes!
+	switch (speciesChoice)
 	{
-		char choice;
+	case 0:
+		
 
 		cout << "Is this a flying mammal? (Y: yes, N: no): ";
 		cin >> choice;
+		cin.ignore();
 
 		while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
 		{
 			cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no: ";
 			cin >> choice;
+			cin.ignore();
 		}
 		isFlyingMammal = (choice == 'Y' || choice == 'y');
 
 		if (isFlyingMammal)
 		{
-			cout << "Can this animal fly? (Y:yes, N:no): ";
-			cin >> choice;
-
-			while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
-			{
-				cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no: ";
-				cin >> choice;
-			}
-			canFly = (choice == 'Y' || choice == 'y');
+			canFly = true;
 		}
-
-	}
-	else if (speciesChoice == 1)
-	{
-		char choice;
+		newAnimal = new Mammal(speciesName, habitat, diet, isFlyingMammal, canFly);
+		jungleAnimals.push_back(newAnimal);
+		break;
+	case 1:
+		
 
 		cout << "Can this animal fly? (Y:yes, N:no): ";
 		cin >> choice;
+		cin.ignore();
 
 		while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
 		{
 			cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no: ";
 			cin >> choice;
+			cin.ignore();
 		}
 		canFly = (choice == 'Y' || choice == 'y');
-
-	}
-	//Switch statement to add the animal to the correct habitat -- Will be updated with more derived classes!
-	switch (speciesChoice)
-	{
-	case 0:
-		newAnimal = new Mammal(speciesName, habitat, diet);
-		jungleAnimals.push_back(newAnimal);
-		break;
-	case 1:
 		newAnimal = new Bird(speciesName, habitat, diet, canFly);
 		jungleAnimals.push_back(newAnimal);
 		break;
