@@ -109,7 +109,12 @@ public:
 		std::unique_ptr<Ticket> ticket = nullptr;
 
 		std::cout << "What kind of ticket are you creating?\n";
-		std::cout << "VIP: 0, Family: 1, Student/Elder Discount: 2, Basic: 3\n";
+		std::cout << "------------------------\n";
+		std::cout << "0: VIP Ticket\n";
+		std::cout << "1: Family Ticket\n";
+		std::cout << "2: Student/Elder Discount Ticket\n";
+		std::cout << "3: Basic Ticket\n";
+		std::cout << "------------------------\n";
 		//loop asking until we break out with a correct answer
 		while (true) {
 			std::cin >> choice;
@@ -132,19 +137,19 @@ public:
 		}
 
 		switch (choice) {
-		case 1:
+		case 0:
 			std::cout << "Creating VIP ticket.\n";
 			ticket = std::make_unique<VIPTicket>();
 			break;
-		case 2:
+		case 1:
 			std::cout << "Creating family ticket.\n";
 			ticket = std::make_unique<FamilyTicket>();
 			break;
-		case 3:
+		case 2:
 			std::cout << "Creating student/elder discount ticket.\n";
 			ticket = std::make_unique<StudentElderTicket>();
 			break;
-		case 4:
+		case 3:
 			std::cout << "Creating basic ticket.\n";
 			ticket = std::make_unique<BasicTicket>();
 			break;
