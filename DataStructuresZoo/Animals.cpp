@@ -36,7 +36,7 @@ Habitat StringHabitat(const string& habitatStr)
 	if (habitatStr == "Forest") return Habitat::Forest;
 	if (habitatStr == "Arctic") return Habitat::Arctic;
 	if (habitatStr == "Aquatic") return Habitat::Aquatic;
-	throw invalid_argument("Invalid habitat string: " + habitatStr);
+	throw invalid_argument("Invalid habitat string:" + habitatStr);
 }
 
 void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
@@ -68,13 +68,17 @@ void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vecto
 
 		if (speciesType == "Mammal")
 		{
-			isFlyingMammal = (canFly_IsFlyingMammal_WaterType == "true");
-			canFly = isFlyingMammal;
+			if (canFly_IsFlyingMammal_WaterType == "Yes")
+			{
+				isFlyingMammal = true;
+				canFly = isFlyingMammal;
+			}
+			
 			newAnimal = new Mammal(speciesName, habitat, dietStr, isFlyingMammal, canFly, predatorsStr);
 		}
 		else if (speciesName == "Bird")
 		{
-			canFly = (canFly_IsFlyingMammal_WaterType == "true");
+			canFly = (canFly_IsFlyingMammal_WaterType == "Yes");
 			newAnimal = new Bird(speciesName, habitat, dietStr, canFly, predatorsStr);
 		}
 		else if (speciesType == "Fish")
@@ -285,13 +289,13 @@ string PredatorsQuestion(string predators)
 
 void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
-
+	cout << '\n';
 	cout << "Forest Biome:\n" << endl;
 	cout << "--------------\n" << endl;
-	for (const auto& animal : jungleAnimals)
+	for (const auto& animal : forestAnimals)
 	{
 		if (animal == nullptr) continue; //Does a check to see if the pointer is null!
-
+		cout << '\n';
 		cout << "Species Name: " << animal->GetSpeciesName() << endl;
 		cout << "Habitat: " << animal->GetHabitat() << endl;
 		cout << "Diet: " << animal->GetDiet() << endl;
