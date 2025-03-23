@@ -18,17 +18,6 @@ int main()
 	vector<Animal*> arcticAnimals;
 	vector<Animal*> aquaticAnimals;
 
-
-	//use queue of purchased tickets
-	/*VIPTicket vip;
-	vip.SetClientName("Ellen Rivers");
-	FamilyTicket family;
-	family.SetClientName("Brennan Berkley");
-	StudentElderTicket student;
-	student.SetClientName("Melissa Adams");
-	BasicTicket basic;
-	basic.SetClientName("John Doe");*/
-
 	TicketList allClients;
 
 	//how it works
