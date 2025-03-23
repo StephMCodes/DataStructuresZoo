@@ -21,19 +21,33 @@ int main()
 
 	//use queue of purchased tickets
 	VIPTicket vip;
-	vip.clientName = "Ellen Rivers";
+	vip.SetClientName("Ellen Rivers");
 	FamilyTicket family;
-	family.clientName = "Brennan Berkley";
+	family.SetClientName("Brennan Berkley");
 	StudentElderTicket student;
-	student.clientName = "Melissa Adams";
+	student.SetClientName("Melissa Adams");
 	BasicTicket basic;
-	basic.clientName = "John Doe";
-	TicketQueue queue;
-	queue.EnterZooReservation(vip);
-	queue.EnterZooReservation(family);
-	queue.EnterZooReservation(student);
-	queue.EnterZooReservation(basic);
-	queue.DisplayZooReservations();
+	basic.SetClientName("John Doe");
+
+	TicketList allClients;
+
+	unique_ptr<VIPTicket> vipTicket = make_unique<VIPTicket>();
+	vipTicket->SetClientName("Ellen Rivers");
+	allClients.EnterZooReservation(move(vipTicket));
+
+	unique_ptr<FamilyTicket> familyTicket = make_unique<FamilyTicket>();
+	familyTicket->SetClientName("Brennan Berkley");
+	allClients.EnterZooReservation(move(familyTicket));
+
+	unique_ptr<StudentElderTicket> studentTicket = make_unique<StudentElderTicket>();
+	studentTicket->SetClientName("Melissa Adams");
+	allClients.EnterZooReservation(move(studentTicket));
+
+	unique_ptr<BasicTicket> basicTicket = make_unique<BasicTicket>();
+	basicTicket->SetClientName("John Doe");
+	allClients.EnterZooReservation(move(basicTicket));
+
+	allClients.DisplayZooReservations();
 
    //this is for the zoo
 	cout << "Welcome to the Zoo!\n";

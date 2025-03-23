@@ -8,7 +8,7 @@ protected://Show Info (start time, end time, activity, location, popularity leve
 	std::string showTitle;
 	std::string showLocation; 
 	int popularityLevel; //from 1-5
-	std::queue<Ticket> zooShowReservations; //the people in line
+	//queue<Ticket> zooShowReservations; //the people in line
 
 
 public:
