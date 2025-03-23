@@ -53,10 +53,15 @@ int main()
 	basicTicket->SetClientName("John Doe");
 	allClients.EnterZooReservation(move(basicTicket));
 
-	allClients.DisplayZooReservations();
-
    //this is for the zoo
 	cout << "Welcome to the Zoo!\n";
+
+	//ticket creation test
+	allClients.AddTicket();
+
+	//display tickets
+	allClients.DisplayZooReservations();
+
 
 	//use the animals Test
 	AddAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
