@@ -54,7 +54,7 @@ int main()
 
 		cout << "Enter your option:\n";
 		std::cin >> menuChoice;
-		//std::cin.ignore();
+		std::cin.ignore();
 		//check ignore
 
 		// take input and validate
@@ -68,6 +68,7 @@ int main()
 
 			std::cout << "Invalid input. Please enter a number between 0 and 3.\n";
 			std::cin >> menuChoice;
+			std::cin.ignore();
 		}
 		//input is valid!
 

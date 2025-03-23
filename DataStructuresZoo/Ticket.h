@@ -118,7 +118,7 @@ public:
 		//loop asking until we break out with a correct answer
 		while (true) {
 			std::cin >> choice;
-			//std::cin.ignore();
+			std::cin.ignore();
 			//check ignore
 
 			// take input and validate
