@@ -11,6 +11,7 @@ using namespace std;
 
 int main()
 {
+	string filename = "Animals.txt";
 	//Animal Vectors to keep track of the animals + add them dynamically
 	vector<Animal*> jungleAnimals;
 	vector<Animal*> desertAnimals;
@@ -62,9 +63,10 @@ int main()
 	//display tickets
 	allClients.DisplayZooReservations();
 
-
+	
 	//use the animals Test
-	AddAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
+	LoadFromFiles(filename, jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
+	//AddAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
 	DisplayAllAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
 	
 	return 0;

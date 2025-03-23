@@ -286,7 +286,7 @@ string PredatorsQuestion(string predators)
 void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
 
-	cout << "Jungle Biome:\n" << endl;
+	cout << "Forest Biome:\n" << endl;
 	cout << "--------------\n" << endl;
 	for (const auto& animal : jungleAnimals)
 	{

@@ -1,1 +1,0 @@
-Mammal, American Beaver, Forest, Vegetarian, No, Humans;Lynx;Coyotes;Bears;Wolves
