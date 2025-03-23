@@ -11,6 +11,7 @@ using namespace std;
 
 int main()
 {
+	string filename = "C:\\Users\\Chpcu\\OneDrive\\Desktop\\W2025\\Advanced Data Structures\\DataStructuresZoo\\DataStructuresZoo\\Animals.txt";
 	//Animal Vectors to keep track of the animals + add them dynamically
 	vector<Animal*> jungleAnimals;
 	vector<Animal*> desertAnimals;
@@ -103,8 +104,9 @@ int main()
 	//ticket creation test
 	//allClients.AddTicket();
 	//use the animals Test
+	LoadFromFiles(filename, jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
 	//AddAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
-	//DisplayAllAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
+	DisplayAllAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
 	
 	return 0;
 	
