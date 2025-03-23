@@ -41,6 +41,7 @@ int main()
 
    //this is for the zoo
 
+	LoadFromFiles(filename, jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals); 
 	//loop asking until we break out with a correct answer
 	while (true) {
 		cout << "Welcome to the Zoo!\n";
@@ -104,9 +105,9 @@ int main()
 	//ticket creation test
 	//allClients.AddTicket();
 	//use the animals Test
-	LoadFromFiles(filename, jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
+	
 	//AddAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
-	DisplayAllAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
+	//DisplayAllAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
 	
 	return 0;
 	
