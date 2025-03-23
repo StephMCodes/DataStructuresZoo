@@ -16,12 +16,13 @@ string Fish::WaterTypeString(WaterType waterType)
 	}
 }
 
-Fish::Fish(const string& speciesName, Habitat habitat, const string& diet, WaterType waterType)
+Fish::Fish(const string& speciesName, Habitat habitat, const string& diet, WaterType waterType, const string& predators)
 {
 	SetSpeciesName(speciesName);
 	SetDiet(diet);
 	SetHabitat(habitat);
 	SetWaterType(waterType);	
+	SetPredators(predators);
 }
 
 void Fish::SetSpeciesName(const string& speciesName)
@@ -39,4 +40,15 @@ void Fish::SetDiet(const string& dite)
 void Fish::SetWaterType(WaterType waterType)
 {
 	this->waterType = waterType;
+}
+void Fish::SetPredators(const string& predators)
+{
+	if (this->predators.empty())
+	{
+		this->predators = predators;
+	}
+	else
+	{
+		this->predators += ", " + predators;
+	}
 }

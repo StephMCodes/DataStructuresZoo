@@ -41,7 +41,7 @@ static void ClearAnimals(vector<Animal*>& animals)
 void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
 	//Variables for the animal
-	string speciesName, diet;
+	string speciesName, diet, predators;
 	Habitat habitat;
 	WaterType waterType;
 	Animal* newAnimal = nullptr;
@@ -93,13 +93,13 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 	cin >> speciesChoice;
 	cin.ignore();
 
-	char choice; 
+	char choice;
 
 	//Switch statement to add the animal to the correct habitat -- Will be updated with more derived classes!
 	switch (speciesChoice)
 	{
 	case 0:
-		
+
 
 		cout << "Is this a flying mammal? (Y: yes, N: no): ";
 		cin >> choice;
@@ -117,11 +117,13 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 		{
 			canFly = true;
 		}
-		newAnimal = new Mammal(speciesName, habitat, diet, isFlyingMammal, canFly);
+
+		predators = PredatorsQuestion(predators);
+		newAnimal = new Mammal(speciesName, habitat, diet, isFlyingMammal, canFly, predators);
 		jungleAnimals.push_back(newAnimal);
 		break;
 	case 1:
-		
+
 
 		cout << "Can this animal fly? (Y:yes, N:no): ";
 		cin >> choice;
@@ -134,7 +136,9 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 			cin.ignore();
 		}
 		canFly = (choice == 'Y' || choice == 'y');
-		newAnimal = new Bird(speciesName, habitat, diet, canFly);
+
+		predators = PredatorsQuestion(predators); 
+		newAnimal = new Bird(speciesName, habitat, diet, canFly, predators);
 		jungleAnimals.push_back(newAnimal);
 		break;
 	case 2:
@@ -154,7 +158,8 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 			cout << "Invalid choice!" << endl;
 			return; // Exit the function if the choice is invalid
 		}
-		newAnimal = new Fish(speciesName, habitat, diet, waterType);
+		predators = PredatorsQuestion(predators); 
+		newAnimal = new Fish(speciesName, habitat, diet, waterType, predators);
 		jungleAnimals.push_back(newAnimal);
 		break;
 	default:
@@ -175,6 +180,24 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 	//ClearAnimals(arcticAnimals);
 	//ClearAnimals(aquaticAnimals);
 }
+string PredatorsQuestion(string predators)
+{
+	int count;
+	string predatorName = "";
+
+	cout << "How many predators?";
+	cin >> count;
+
+	for (int i = 0; i < count; i++)
+	{
+		cout << "Enter Predator " << i + 1;
+		cin >> predatorName;
+		
+			predators +=predatorName;
+		
+	}
+	return predators;
+}
 
 void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
@@ -194,7 +217,8 @@ void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 		{
 			cout << animal->GetSpeciesName() << " live in " << fish->GetWaterType() << endl;
 		}
-		
+		cout << "Predators: " << animal->GetPredators() << endl;
+
 	}
 }
 
