@@ -6,6 +6,8 @@
 #include "Mammal.h"
 #include "Bird.h"
 #include "Fish.h"
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -27,6 +29,85 @@ string Animal::HabitatString(Habitat habitat)
 		return "Selection Invalid!";
 	}
 };
+Habitat StringHabitat(const string& habitatStr) 
+{
+	if (habitatStr == "Jungle") return Habitat::Jungle;
+	if (habitatStr == "Desert") return Habitat::Desert;
+	if (habitatStr == "Forest") return Habitat::Forest;
+	if (habitatStr == "Arctic") return Habitat::Arctic;
+	if (habitatStr == "Aquatic") return Habitat::Aquatic;
+	throw invalid_argument("Invalid habitat string: " + habitatStr);
+}
+
+void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
+{
+	ifstream file(filename);
+	if (!file.is_open())
+	{
+		cout << "Failed to open the file: " << filename << endl; 
+		return;
+	}
+
+	string line;
+	while (getline(file, line))
+	{
+		stringstream ss(line);
+		string speciesType, speciesName, habitatStr, dietStr, canFly_IsFlyingMammal_WaterType, predatorsStr;
+		bool canFly = false, isFlyingMammal = false;
+		Habitat habitat;
+		Animal* newAnimal = nullptr;
+
+		getline(ss, speciesType, ',');
+		getline(ss, speciesName, ',');
+		getline(ss, habitatStr, ',');
+		getline(ss, dietStr, ',');
+		getline(ss, canFly_IsFlyingMammal_WaterType, ',');
+		getline(ss, predatorsStr, ',');
+
+		habitat = StringHabitat(habitatStr);
+
+		if (speciesType == "Mammal")
+		{
+			isFlyingMammal = (canFly_IsFlyingMammal_WaterType == "true");
+			canFly = isFlyingMammal;
+			newAnimal = new Mammal(speciesName, habitat, dietStr, isFlyingMammal, canFly, predatorsStr);
+		}
+		else if (speciesName == "Bird")
+		{
+			canFly = (canFly_IsFlyingMammal_WaterType == "true");
+			newAnimal = new Bird(speciesName, habitat, dietStr, canFly, predatorsStr);
+		}
+		else if (speciesType == "Fish")
+		{
+			WaterType waterType = (canFly_IsFlyingMammal_WaterType == "FreshWater") ? WaterType::FreshWater : WaterType::SaltWater;
+		}
+		else
+		{
+			cout << "Invalid Species Type: " << speciesType << endl;
+		}
+
+		switch (habitat)
+		{
+		case Habitat::Jungle:
+			jungleAnimals.push_back(newAnimal);
+			break;
+		case Habitat::Forest:
+			forestAnimals.push_back(newAnimal);
+			break;
+		case Habitat::Desert:
+			desertAnimals.push_back(newAnimal);
+			break;
+		case Habitat::Aquatic:
+			aquaticAnimals.push_back(newAnimal);
+			break;
+		case Habitat::Arctic:
+			arcticAnimals.push_back(newAnimal);
+			break;
+
+		}
+	}
+
+}
 //Clears Animals for the dynamically allocated memory
 static void ClearAnimals(vector<Animal*>& animals)
 {
@@ -50,6 +131,7 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 	bool canFly = false;
 	bool isFlyingMammal = false;
 
+	//For all switch cases
 	int waterTypeChoice;
 	int habitatChoice;
 	int speciesChoice;
@@ -94,13 +176,10 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 	cin.ignore();
 
 	char choice;
-
 	//Switch statement to add the animal to the correct habitat -- Will be updated with more derived classes!
 	switch (speciesChoice)
 	{
-	case 0:
-
-
+	case 0: //Mammals
 		cout << "Is this a flying mammal? (Y: yes, N: no): ";
 		cin >> choice;
 		cin.ignore();
@@ -122,9 +201,8 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 		newAnimal = new Mammal(speciesName, habitat, diet, isFlyingMammal, canFly, predators);
 		jungleAnimals.push_back(newAnimal);
 		break;
-	case 1:
 
-
+	case 1: //Birds
 		cout << "Can this animal fly? (Y:yes, N:no): ";
 		cin >> choice;
 		cin.ignore();
@@ -137,11 +215,12 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 		}
 		canFly = (choice == 'Y' || choice == 'y');
 
-		predators = PredatorsQuestion(predators); 
+		predators = PredatorsQuestion(predators);
 		newAnimal = new Bird(speciesName, habitat, diet, canFly, predators);
 		jungleAnimals.push_back(newAnimal);
 		break;
-	case 2:
+
+	case 2: //Fish
 		cout << "Enter the Water Type of the fish (0:Freshwater, 1:Saltwater): ";
 		cin >> waterTypeChoice;
 		cin.ignore();
@@ -158,10 +237,11 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 			cout << "Invalid choice!" << endl;
 			return; // Exit the function if the choice is invalid
 		}
-		predators = PredatorsQuestion(predators); 
+		predators = PredatorsQuestion(predators);
 		newAnimal = new Fish(speciesName, habitat, diet, waterType, predators);
 		jungleAnimals.push_back(newAnimal);
 		break;
+
 	default:
 		cout << "Invalid species choice!" << endl;
 		break;
@@ -185,16 +265,20 @@ string PredatorsQuestion(string predators)
 	int count;
 	string predatorName = "";
 
-	cout << "How many predators?";
+	cout << "How many predators?: ";
 	cin >> count;
+	cin.ignore();
 
 	for (int i = 0; i < count; i++)
 	{
-		cout << "Enter Predator " << i + 1;
+		cout << "Enter Predator " << i + 1 << ": ";
 		cin >> predatorName;
-		
-			predators +=predatorName;
-		
+		cin.ignore();
+		predators += predatorName;
+		if (i < count - 1) // Add a comma if it's not the last predator
+		{
+			predators += ", ";
+		}
 	}
 	return predators;
 }
@@ -206,6 +290,8 @@ void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 	cout << "--------------\n" << endl;
 	for (const auto& animal : jungleAnimals)
 	{
+		if (animal == nullptr) continue; //Does a check to see if the pointer is null!
+
 		cout << "Species Name: " << animal->GetSpeciesName() << endl;
 		cout << "Habitat: " << animal->GetHabitat() << endl;
 		cout << "Diet: " << animal->GetDiet() << endl;
@@ -218,7 +304,6 @@ void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 			cout << animal->GetSpeciesName() << " live in " << fish->GetWaterType() << endl;
 		}
 		cout << "Predators: " << animal->GetPredators() << endl;
-
 	}
 }
 
