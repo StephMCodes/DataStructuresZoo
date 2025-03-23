@@ -9,7 +9,7 @@
 struct Ticket
 {
 protected: //encapsulation
-	//Ticket (VIP, family, classic) <- add the price
+	//Ticket (VIP, family, basic)
 	std::string type;
 	int price;
     std::string clientName; //TO FIX AT SOME POINT (REFERENCES ANIMALS)
@@ -20,13 +20,16 @@ protected: //encapsulation
 	{
 	}
 
-public: //a simple read-only displaying method that needs to be public so it can be used
+public: 
     virtual ~Ticket() = default; // destructor
+
     //SETTER
     void SetClientName(const std::string& name) {
         clientName = name;
     }
+
     //display method
+    //a simple read-only displaying method that needs to be public so it can be used
     void DisplayTicketInfo() const {
 		std::cout << "Ticket Type: " << type << "\nPrice($): " << price << "\nName: " << clientName << std::endl;
 	}
@@ -53,6 +56,51 @@ struct BasicTicket : Ticket
 	BasicTicket() : Ticket("Basic Ticket", 20, "") {} // simple 20 dollar ticket
 };
 
+struct TicketList {
+private:
+    std::list<std::unique_ptr<Ticket>> zooTicketReservations;
+    //we use smart pointers to have simpler memory management
+
+    //this is where all clients are stored, there is a list for the ones in each biome
+    //that are visiting the show and one for all clients
+
+public:
+    // Add a new reservation to the list (memory managed with unique_ptr)
+    void EnterZooReservation(std::unique_ptr<Ticket> ticket) {
+        zooTicketReservations.push_back(std::move(ticket)); // Transfer ptr to the list
+        std::cout << "Ticket reservation entered into the list." << std::endl;
+    }
+
+    // Display reservations without modifying the list
+    void DisplayZooReservations() const {
+        if (zooTicketReservations.empty()) {
+            std::cout << "No one's at the zoo right now." << std::endl;
+            return;
+        }
+
+        std::cout << "Current list of zoo ticket holders: " << std::endl;
+        for (const auto& ticket : zooTicketReservations) {
+            ticket->DisplayTicketInfo();
+            std::cout << "----------------------" << std::endl;
+        }
+    }
+
+    // Clean up all reservations
+    void ClearReservations() {
+        if (zooTicketReservations.empty()) {
+            std::cout << "No reservations to clear." << std::endl;
+            return;
+        }
+
+        std::cout << "Processing and clearing all reservations..." << std::endl;
+        zooTicketReservations.clear(); // Automatically cleans up memory via unique_ptr
+        std::cout << "All zoo reservations cleared." << std::endl;
+    }
+
+
+};
+
+//improve ticket queue to avoid splicing by using unique ptrs here too
 struct TicketQueue {
 private:
     std::queue<Ticket> zooTicketQueue;
@@ -86,50 +134,24 @@ public:
         }
     }
 
+    void AddTicket()
+    {
+        //user input for ticket
+        int choice;
+        std::string name;
+
+        //display msg
+        std::cout << "What kind of ticket are you creating?";
+        std::cout << "VIP: 0, Family: 1, Student/Elder Discount: 2, Basic: 3";
+
+        //take input
+        //ADD CHECKERS!!!
+        std::cin >> choice;
+        std::cin.ignore();
+    }
+
 };
 
-struct TicketList {
-private:
-    std::list<std::unique_ptr<Ticket>> zooTicketReservations;
-    //we use smart pointers to have simpler memory management
 
-    //this is where all clients are stored, there is a list for the ones in each biome
-    //that are visiting the show and one for all clients
-
-public:
-    // Add a new reservation to the list (memory managed with unique_ptr)
-    void EnterZooReservation(std::unique_ptr<Ticket> ticket) {
-        zooTicketReservations.push_back(std::move(ticket)); // Push to the list
-        std::cout << "Ticket reservation entered into the list." << std::endl;
-    }
-
-    // Display reservations without modifying the list
-    void DisplayZooReservations() const {
-        if (zooTicketReservations.empty()) {
-            std::cout << "No one's at the zoo right now." << std::endl;
-            return;
-        }
-
-        std::cout << "Current list of zoo ticket holders: " << std::endl;
-        for (const auto& ticket : zooTicketReservations) {
-            ticket->DisplayTicketInfo();
-            std::cout << "----------------------" << std::endl;
-        }
-    }
-
-    // Process and clean up reservations
-    void ProcessReservations() {
-        if (zooTicketReservations.empty()) {
-            std::cout << "No reservations to process." << std::endl;
-            return;
-        }
-
-        std::cout << "Processing and clearing all reservations..." << std::endl;
-        zooTicketReservations.clear(); // Automatically cleans up memory via unique_ptr
-        std::cout << "All reservations processed and cleared." << std::endl;
-    }
-
-
-};
 
 
