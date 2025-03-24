@@ -29,6 +29,7 @@ string Animal::HabitatString(Habitat habitat)
 		return "Selection Invalid!";
 	}
 };
+//This just changes the strign to the Habitat for the LoadFromFiles()
 Habitat StringHabitat(const string& habitatStr) 
 {
 	if (habitatStr == "Jungle") return Habitat::Jungle;
@@ -39,8 +40,11 @@ Habitat StringHabitat(const string& habitatStr)
 	throw invalid_argument("Invalid habitat string:" + habitatStr);
 }
 
+//Loads from a file to add animals right away instead of having an empty zoo
+//Takes the string for the name of the file, followed by all our vector lists
 void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
+	//Checks if the file even exists or opens in the first place
 	ifstream file(filename);
 	if (!file.is_open())
 	{
@@ -48,15 +52,20 @@ void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vecto
 		return;
 	}
 
+	//string line for dividing up the lines in the text file
 	string line;
 	while (getline(file, line))
 	{
+		//string stream exists in the program to help read string and format the input
 		stringstream ss(line);
+
+		//The format of the Animals.txt
 		string speciesType, speciesName, habitatStr, dietStr, canFly_IsFlyingMammal_WaterType, predatorsStr;
 		bool canFly = false, isFlyingMammal = false;
 		Habitat habitat;
 		Animal* newAnimal = nullptr;
 
+		//Checks each line and divides the variables by the ',' comma
 		getline(ss, speciesType, ',');
 		getline(ss, speciesName, ',');
 		getline(ss, habitatStr, ',');
@@ -64,8 +73,10 @@ void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vecto
 		getline(ss, canFly_IsFlyingMammal_WaterType, ',');
 		getline(ss, predatorsStr, ',');
 
+		//Changes habitatStr to the acutal Habitat
 		habitat = StringHabitat(habitatStr);
 
+		//This takes the if statement of each type of animal (switch case can't be used with string in C++
 		if (speciesType == "Mammal")
 		{
 			if (canFly_IsFlyingMammal_WaterType == "Yes")
@@ -73,10 +84,15 @@ void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vecto
 				isFlyingMammal = true;
 				canFly = isFlyingMammal;
 			}
+			else
+			{
+				isFlyingMammal = false;
+				canFly = isFlyingMammal;
+			}
 			
 			newAnimal = new Mammal(speciesName, habitat, dietStr, isFlyingMammal, canFly, predatorsStr);
 		}
-		else if (speciesName == "Bird")
+		else if (speciesType == "Bird")
 		{
 			canFly = (canFly_IsFlyingMammal_WaterType == "Yes");
 			newAnimal = new Bird(speciesName, habitat, dietStr, canFly, predatorsStr);
