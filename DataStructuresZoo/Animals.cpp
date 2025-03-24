@@ -113,7 +113,7 @@ void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vecto
 
 }
 //Clears Animals for the dynamically allocated memory
-static void ClearAnimals(vector<Animal*>& animals)
+void ClearAnimals(vector<Animal*>& animals)
 {
 	for (Animal* animal : animals)
 	{

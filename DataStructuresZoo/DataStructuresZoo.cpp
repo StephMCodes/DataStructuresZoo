@@ -94,6 +94,11 @@ int main()
 			break;
 		case 4:
 			// close
+			ClearAnimals(jungleAnimals);
+			ClearAnimals(desertAnimals);
+			ClearAnimals(forestAnimals);
+			ClearAnimals(arcticAnimals);
+			ClearAnimals(aquaticAnimals);
 			std::cout << "Goodbye! Closing the zoo...\n";
 			return 0;
 		default:
