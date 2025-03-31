@@ -30,7 +30,7 @@ string Animal::HabitatString(Habitat habitat)
 	}
 };
 //This just changes the strign to the Habitat for the LoadFromFiles()
-Habitat StringHabitat(const string& habitatStr) 
+Habitat StringHabitat(const string& habitatStr)
 {
 	if (habitatStr == "Jungle") return Habitat::Jungle;
 	if (habitatStr == "Desert") return Habitat::Desert;
@@ -48,7 +48,7 @@ void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vecto
 	ifstream file(filename);
 	if (!file.is_open())
 	{
-		cout << "Failed to open the file: " << filename << endl; 
+		cout << "Failed to open the file: " << filename << endl;
 		return;
 	}
 
@@ -89,7 +89,7 @@ void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vecto
 				isFlyingMammal = false;
 				canFly = isFlyingMammal;
 			}
-			
+
 			newAnimal = new Mammal(speciesName, habitat, dietStr, isFlyingMammal, canFly, predatorsStr);
 		}
 		else if (speciesType == "Bird")
@@ -305,29 +305,41 @@ string PredatorsQuestion(string predators)
 
 void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
-	cout << '\n';
-	cout << "Forest Biome:\n" << endl;
-	cout << "--------------\n" << endl;
-	for (const auto& animal : forestAnimals)
+	auto displayAnimals = [](const vector<Animal*>& animals, const string& biomeName)
 	{
-		if (animal == nullptr) continue; //Does a check to see if the pointer is null!
 		cout << '\n';
-		cout << "Species Name: " << animal->GetSpeciesName() << endl;
-		cout << "Habitat: " << animal->GetHabitat() << endl;
-		cout << "Diet: " << animal->GetDiet() << endl;
-		if (IFly* flyingAnimal = dynamic_cast<IFly*>(animal))
+		cout << biomeName << " Biome:\n" << endl;
+		cout << "--------------\n" << endl;
+		for (const auto& animal : animals)
 		{
-			cout << "Can Fly: " << (flyingAnimal->CanFly() ? "Yes" : "No") << endl;
+			if (animal == nullptr) continue; //Does a check to see if the pointer is null!
+			cout << '\n';
+			cout << "Species Name: " << animal->GetSpeciesName() << endl;
+			cout << "Habitat: " << animal->GetHabitat() << endl;
+			cout << "Diet: " << animal->GetDiet() << endl;
+			if (IFly* flyingAnimal = dynamic_cast<IFly*>(animal))
+			{
+				cout << "Can Fly: " << (flyingAnimal->CanFly() ? "Yes" : "No") << endl;
+			}
+			else if (Fish* fish = dynamic_cast<Fish*>(animal))
+			{
+				cout << animal->GetSpeciesName() << " live in " << fish->GetWaterType() << endl;
+			}
+			else
+			{
+				cout << "Can Fly: No";
+			}
+			cout << "Predators: " << animal->GetPredators() << endl;
 		}
-		else if (Fish* fish = dynamic_cast<Fish*>(animal))
-		{
-			cout << animal->GetSpeciesName() << " live in " << fish->GetWaterType() << endl;
-		}
-		else
-		{
-			cout << "Can Fly: No";
-		}
-		cout << "Predators: " << animal->GetPredators() << endl;
-	}
+
+	};
+
+	displayAnimals(jungleAnimals, "Jungle");
+	displayAnimals(desertAnimals, "Desert");
+	displayAnimals(forestAnimals, "Forest");
+	displayAnimals(arcticAnimals, "Arctic");
+	displayAnimals(aquaticAnimals, "Aquatic");
+
+
 }
 
