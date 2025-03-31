@@ -10,6 +10,8 @@ protected://Show Info (start time, end time, activity, location, popularity leve
 	int popularityLevel; //from 1-5
 	//queue<Ticket> zooShowReservations; //the people in line
 
+	//list of people in show
+
 
 public:
 
