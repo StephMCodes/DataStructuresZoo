@@ -71,7 +71,9 @@ void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vecto
 		getline(ss, habitatStr, ',');
 		getline(ss, dietStr, ',');
 		getline(ss, canFly_IsFlyingMammal_WaterType, ',');
-		getline(ss, predatorsStr, ',');
+
+		//Read the rest of the line
+		getline(ss, predatorsStr);
 
 		//Changes habitatStr to the acutal Habitat
 		habitat = StringHabitat(habitatStr);
