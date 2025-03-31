@@ -1,2 +1,10 @@
 Mammal,American Beaver,Forest,Vegetarian,No,Humans,Lynx,Coyotes,Bears,Wolves
 Mammal,Northern Raccoon,Forest,Omnivore,No,Cougars,Bobcats,Wolves,Foxes,Coyotes,Great Horned Owls
+Mammal,North American River Otter,Aquatic,Carnivore,No,Humans,Wolves,Coyotes,Canadian Lynx,Bobcats,Great Horned Owl
+Mammal,Capybara,Jungle,Vegetarian,No,Humans,Anacondas,Caimans,Harpy Eagles,Jaguars,Ocelots,Pumas
+Mammal,Canadian Lynx,Forest,Carnivore,No,Humans,Cougars,Wolves
+Mammal,Jamaican Fruit Bat,Jungle,Vegetarian,Yes,Owls,Bat Falcons,Snakes,Opossums
+Mammal,Seba's Short-tailed Bat,Forest,Vegetarian,Yes,Snakes,Raptors,Nocturnal Arboreal Mammals
+Fish,Atlantic Sturgeon,Aquatic,Pescatarian,SaltWater,Eels
+Fish,Brook Trout,Aquatic,Carnivore,FreshWater,Humans
+Fish,Ocean Pout,Aquatic,Pescatarian,SaltWater,Sea Ravens,Cod,Seals

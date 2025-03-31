@@ -102,6 +102,7 @@ void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vecto
 		else if (speciesType == "Fish")
 		{
 			WaterType waterType = (canFly_IsFlyingMammal_WaterType == "FreshWater") ? WaterType::FreshWater : WaterType::SaltWater;
+			newAnimal = new Fish(speciesName, habitat, dietStr, waterType, predatorsStr);
 		}
 		else
 		{
@@ -326,10 +327,6 @@ void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 			else if (Fish* fish = dynamic_cast<Fish*>(animal))
 			{
 				cout << animal->GetSpeciesName() << " live in " << fish->GetWaterType() << endl;
-			}
-			else
-			{
-				cout << "Can Fly: No";
 			}
 			cout << "Predators: " << animal->GetPredators() << endl;
 		}
