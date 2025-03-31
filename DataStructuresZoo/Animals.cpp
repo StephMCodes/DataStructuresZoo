@@ -323,6 +323,10 @@ void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 		{
 			cout << animal->GetSpeciesName() << " live in " << fish->GetWaterType() << endl;
 		}
+		else
+		{
+			cout << "Can Fly: No";
+		}
 		cout << "Predators: " << animal->GetPredators() << endl;
 	}
 }
