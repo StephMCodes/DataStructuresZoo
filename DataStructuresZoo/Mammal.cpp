@@ -9,10 +9,7 @@ Mammal::Mammal(const string& speciesName, Habitat habitat, const string& diet, b
 	SetDiet(diet);
 	SetPredators(predators);
 	this->isFlyingMammal = isFlyingMammal;
-	if (isFlyingMammal)
-	{
-		SetCanFly(canFly);
-	}
+	this->canFly = isFlyingMammal ? canFly : false; //Makes sure that mammals assigns canFly properly!
 }
 
 //SETTERS
@@ -30,10 +27,7 @@ void Mammal::SetHabitat(Habitat habitat)
 }
 void Mammal::SetCanFly(bool canFly)
 {
-	if (isFlyingMammal)
-	{
-		this->canFly = canFly;
-	}
+	this->canFly = isFlyingMammal ? canFly : false;
 }
 void Mammal::SetPredators(const string& predators)
 {
