@@ -17,3 +17,7 @@ Bird,Scarlet Macaw,Jungle,Vegetarian,Yes,Harpy Eagles
 Bird,King Penguin,Arctic,Pescatarian,No,Killer Whales,Sea Leopards,Southern Sea Lions
 Bird,Moseley's Rockhopper Penguin,Arctic,Pescatarian,No,Blue Sharks,Sea Leopards,Fur Seals,Hooker's Sea Lions
 Bird,Turquoise Tanager,Forest,Vegetarian,Yes,Raptors,Felines,Snakes
+Mammal,Fennec Fox,Desert,Carnivore,No,Humans,Hyenas,Birds of Prey
+Mammal,Northwest African Cheetah,Desert,Carnivore,No,Humans
+Mammal,Jerboa,Desert,Carnivore,No,Humans,Jerboas,Foxes,Cats,Jackals,Small Owls,Snakes
+Mammals,Camel,Desert,Vegetarian,No,Grey Wolf
