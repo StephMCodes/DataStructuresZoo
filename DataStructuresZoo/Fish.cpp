@@ -33,7 +33,7 @@ void Fish::SetHabitat(Habitat habitat)
 {
 	this->habitat = habitat;
 }
-void Fish::SetDiet(const string& dite)
+void Fish::SetDiet(const string& diet)
 {
 	this->diet = diet;
 }

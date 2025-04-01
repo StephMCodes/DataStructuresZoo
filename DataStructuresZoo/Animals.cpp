@@ -275,13 +275,6 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 		cout << speciesName << " was added to the " << newAnimal->GetHabitat() << " habitat!" << endl;
 	}
 
-	//THIS NEEDS TO BE DONE WHEN THE CONSOLE CLOSES!
-	//Clear the memory for all -- just to be safe!
-	//ClearAnimals(jungleAnimals);
-	//ClearAnimals(desertAnimals);
-	//ClearAnimals(forestAnimals);
-	//ClearAnimals(arcticAnimals);
-	//ClearAnimals(aquaticAnimals);
 }
 string PredatorsQuestion(string predators)
 {
@@ -308,6 +301,7 @@ string PredatorsQuestion(string predators)
 
 void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
+    
 	auto displayAnimals = [](const vector<Animal*>& animals, const string& biomeName)
 	{
 		cout << '\n';
@@ -338,7 +332,5 @@ void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAn
 	displayAnimals(forestAnimals, "Forest");
 	displayAnimals(arcticAnimals, "Arctic");
 	displayAnimals(aquaticAnimals, "Aquatic");
-
-
 }
 
