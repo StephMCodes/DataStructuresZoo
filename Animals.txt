@@ -1,2 +1,23 @@
-Mammal,American Beaver,Forest,Vegetarian,No,Humans;Lynx;Coyotes;Bears;Wolves
-Mammal,Northern Raccoon,Forest,Omnivore,No,Cougars;Bobcats;Wolves;Foxes;Coyotes;Great Horned Owls
+Mammal,American Beaver,Forest,Vegetarian,No,Humans,Lynx,Coyotes,Bears,Wolves
+Mammal,Northern Raccoon,Forest,Omnivore,No,Cougars,Bobcats,Wolves,Foxes,Coyotes,Great Horned Owls
+Mammal,North American River Otter,Aquatic,Carnivore,No,Humans,Wolves,Coyotes,Canadian Lynx,Bobcats,Great Horned Owl
+Mammal,Capybara,Jungle,Vegetarian,No,Humans,Anacondas,Caimans,Harpy Eagles,Jaguars,Ocelots,Pumas
+Mammal,Canadian Lynx,Forest,Carnivore,No,Humans,Cougars,Wolves
+Mammal,Jamaican Fruit Bat,Jungle,Vegetarian,Yes,Owls,Bat Falcons,Snakes,Opossums
+Mammal,Seba's Short-tailed Bat,Forest,Vegetarian,Yes,Snakes,Raptors,Nocturnal Arboreal Mammals
+Fish,Atlantic Sturgeon,Aquatic,Pescatarian,SaltWater,Eels
+Fish,Brook Trout,Aquatic,Carnivore,FreshWater,Humans
+Fish,Ocean Pout,Aquatic,Pescatarian,SaltWater,Sea Ravens,Cod,Seals
+Fish,Red-bellied Piranha,Aquatic,Carnivore,FreshWater,Humans,Piranhas
+Fish,Rock Gunnel,Aquatic,Pescatarian,FreshWater,Black Guillemot,Double-crested Cormorant
+Fish,Tiger Catfish,Aquatic,Carnivore,FreshWater,Birds and other fish
+Bird,Atlantic Puffin,Arctic,Pescatarian,Yes,Great Black-backed Gull
+Bird,Blue and Yellow Macaw,Jungle,Vegetarian,Yes,Harpy Eagles
+Bird,Scarlet Macaw,Jungle,Vegetarian,Yes,Harpy Eagles
+Bird,King Penguin,Arctic,Pescatarian,No,Killer Whales,Sea Leopards,Southern Sea Lions
+Bird,Moseley's Rockhopper Penguin,Arctic,Pescatarian,No,Blue Sharks,Sea Leopards,Fur Seals,Hooker's Sea Lions
+Bird,Turquoise Tanager,Forest,Vegetarian,Yes,Raptors,Felines,Snakes
+Mammal,Fennec Fox,Desert,Carnivore,No,Humans,Hyenas,Birds of Prey
+Mammal,Northwest African Cheetah,Desert,Carnivore,No,Humans
+Mammal,Jerboa,Desert,Carnivore,No,Humans,Jerboas,Foxes,Cats,Jackals,Small Owls,Snakes
+Mammals,Camel,Desert,Vegetarian,No,Grey Wolf
