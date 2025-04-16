@@ -70,7 +70,7 @@ void LoadFromFiles(const string& filename, vector<Animal*>& jungleAnimals, vecto
 		getline(ss, speciesName, ',');
 		getline(ss, habitatStr, ',');
 		getline(ss, dietStr, ',');
-		getline(ss, feedingTimes, ',');
+		getline(ss, feedingTimes, ';');
 		getline(ss, canFly_IsFlyingMammal_WaterType, ',');
 
 		//Read the rest of the line
@@ -159,6 +159,7 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 	int waterTypeChoice;
 	int habitatChoice;
 	int speciesChoice;
+	int feedingAmount;
 	int feedingChoice;
 
 	//User input
@@ -170,29 +171,38 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 	cin >> diet;
 	cin.ignore();
 
-	while (feedingTimes.empty())
+	cout << "How many feeding times does this animal have?: ";
+	cin >> feedingAmount;
+	cin.ignore();
+
+	for (int i = 0; i < feedingAmount; i++)
 	{
-		cout << "Please Select a feeding time for the animal:\n";
+		cout << "Please Select the " << (i + 1) << "feeding time for the animal : \n";
 		cout << "(1)Morning, (2)Afternoon, (3)Evening -- Please enter the number of the feeding time.\n";
 		cin >> feedingChoice;
 
 		switch (feedingChoice)
 		{
 		case 1:
-			feedingTimes = "Morning";
+			feedingTimes += "Morning";
 			break;
 		case 2:
-			feedingTimes = "Afternoon";
+			feedingTimes += "Afternoon";
 			break;
 		case 3:
-			feedingTimes = "Evening";
+			feedingTimes += "Evening";
 			break;
 		default:
 			cout << "You did not make a proper selection!\n";
 			break;
 		}
+		if (i >= 0 && i < feedingAmount - 1)
+		{
+			feedingTimes += ",";
+		}
+
 	}
-	
+
 	cout << "Enter the habitat of the animal (0:Jungle, 1:Desert, 2:Forest, 3:Arctic, 4:Aquatic): ";
 	cin >> habitatChoice;
 	cin.ignore();
@@ -326,32 +336,32 @@ string PredatorsQuestion(string predators)
 
 void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
-    
-	auto displayAnimals = [](const vector<Animal*>& animals, const string& biomeName)
-	{
-		cout << '\n';
-		cout << biomeName << " Biome:\n" << endl;
-		cout << "--------------\n" << endl;
-		for (const auto& animal : animals)
-		{
-			if (animal == nullptr) continue; //Does a check to see if the pointer is null!
-			cout << '\n';
-			cout << "Species Name: " << animal->GetSpeciesName() << endl;
-			cout << "Habitat: " << animal->GetHabitat() << endl;
-			cout << "Diet: " << animal->GetDiet() << endl;
-			cout << "Feeding Time: " << animal->GetFeedingTime() << endl;
-			if (IFly* flyingAnimal = dynamic_cast<IFly*>(animal))
-			{
-				cout << "Can Fly: " << (flyingAnimal->CanFly() ? "Yes" : "No") << endl;
-			}
-			else if (Fish* fish = dynamic_cast<Fish*>(animal))
-			{
-				cout << animal->GetSpeciesName() << " live in " << fish->GetWaterType() << endl;
-			}
-			cout << "Predators: " << animal->GetPredators() << endl;
-		}
 
-	};
+	auto displayAnimals = [](const vector<Animal*>& animals, const string& biomeName)
+		{
+			cout << '\n';
+			cout << biomeName << " Biome:\n" << endl;
+			cout << "--------------\n" << endl;
+			for (const auto& animal : animals)
+			{
+				if (animal == nullptr) continue; //Does a check to see if the pointer is null!
+				cout << '\n';
+				cout << "Species Name: " << animal->GetSpeciesName() << endl;
+				cout << "Habitat: " << animal->GetHabitat() << endl;
+				cout << "Diet: " << animal->GetDiet() << endl;
+				cout << "Feeding Time: " << animal->GetFeedingTime() << endl;
+				if (IFly* flyingAnimal = dynamic_cast<IFly*>(animal))
+				{
+					cout << "Can Fly: " << (flyingAnimal->CanFly() ? "Yes" : "No") << endl;
+				}
+				else if (Fish* fish = dynamic_cast<Fish*>(animal))
+				{
+					cout << animal->GetSpeciesName() << " live in " << fish->GetWaterType() << endl;
+				}
+				cout << "Predators: " << animal->GetPredators() << endl;
+			}
+
+		};
 
 	displayAnimals(jungleAnimals, "Jungle");
 	displayAnimals(desertAnimals, "Desert");
