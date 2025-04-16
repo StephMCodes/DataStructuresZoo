@@ -2,12 +2,13 @@
 #include "IFly.h"
 #include "Animals.h"
 
-Mammal::Mammal(const string& speciesName, Habitat habitat, const string& diet, bool isFlyingMammal, bool canFly, const string& predators)
+Mammal::Mammal(const string& speciesName, Habitat habitat, const string& diet, string feedingTimes, bool isFlyingMammal, bool canFly, const string& predators)
 {
 	SetSpeciesName(speciesName);
 	SetHabitat(habitat);
 	SetDiet(diet);
 	SetPredators(predators);
+	SetFeedingTime(feedingTimes);
 	this->isFlyingMammal = isFlyingMammal;
 	this->canFly = isFlyingMammal ? canFly : false; //Makes sure that mammals assigns canFly properly!
 }
@@ -39,5 +40,9 @@ void Mammal::SetPredators(const string& predators)
 	{
 		this->predators += ", " + predators;
 	}
+}
+void Mammal::SetFeedingTime(const string& feedingTimes)
+{
+	this->feedingTimes = feedingTimes;
 }
 bool Mammal::CanFly() const { return canFly; }
