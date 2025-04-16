@@ -14,7 +14,7 @@ private:
 	WaterType waterType;
 public:
 	//Constructor
-	Fish(const string& speciesName, Habitat habitat, const string& diet, WaterType waterType, const string& predators = "");
+	Fish(const string& speciesName, Habitat habitat, const string& diet, string feedingTimes, WaterType waterType, const string& predators = "");
 
 	//SETTERS
 	void SetDiet(const string& diet) override;
@@ -22,6 +22,7 @@ public:
 	void SetSpeciesName(const string& speciesName) override;
 	void SetPredators(const string& predators) override;
 	void SetWaterType(WaterType waterType);
+	void SetFeedingTime(const string& feedingTimes) override;
 
 	//GETTER
 	string GetWaterType() const { return WaterTypeString(waterType); }

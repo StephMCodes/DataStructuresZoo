@@ -44,7 +44,7 @@ int main()
 	LoadFromFiles(filename, jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals); 
 	//loop asking until we break out with a correct answer
 	while (true) {
-		cout << "Welcome to the Zoo!\n";
+		cout << "\nWelcome to the Zoo!\n";
 
 		cout << "------------------------\n";
 		cout << "0: Enter a new client's ticket\n";

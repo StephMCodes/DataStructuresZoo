@@ -3,13 +3,14 @@
 #include "Bird.h"
 using namespace std;
 
-Bird::Bird(const string& speciesName, Habitat habitat, const string& diet, bool canFly, const string& predators)
+Bird::Bird(const string& speciesName, Habitat habitat, const string& diet, string feedingTimes, bool canFly, const string& predators)
 {
 	SetSpeciesName(speciesName);
 	SetHabitat(habitat);
 	SetDiet(diet);
 	SetCanFly(canFly);
 	SetPredators(predators);
+	SetFeedingTime(feedingTimes);
 }
 
 //SETTERS
@@ -40,4 +41,8 @@ void Bird::SetPredators(const string& predators)
 		this->predators += ", " + predators;
 	}
 	
+}
+void Bird::SetFeedingTime(const string& feedingTimes)
+{
+	this->feedingTimes = feedingTimes;
 }

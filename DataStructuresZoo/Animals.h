@@ -20,6 +20,7 @@ protected:
 	Habitat habitat; // No initialization
 	string diet;
 	string predators;
+	string feedingTimes;
 
 public:
 	virtual ~Animal() = default;//destructor
@@ -29,12 +30,14 @@ public:
 	virtual void SetHabitat(const Habitat habitat) = 0;
 	virtual void SetDiet(const string& diet) = 0;
 	virtual void SetPredators(const string& predators) = 0;
+	virtual void SetFeedingTime(const string& feedingTimes) = 0;
 
 	//GETTERS
 	string GetSpeciesName() const { return speciesName; }
 	string GetHabitat() const { return HabitatString(habitat); }
 	string GetDiet() const { return diet; }
 	string GetPredators() const { return predators; }
+	string GetFeedingTime() const { return feedingTimes; }
 
 	//Function to return the habitat as a string
 	static string HabitatString(Habitat habitat);

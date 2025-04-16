@@ -14,7 +14,7 @@ private:
 
 public:
 	//Constructor
-	Mammal(const string& speciesName, Habitat habitat, const string& diet, bool isFlyingMammal = false, bool canFly = false, const string& predators = "");
+	Mammal(const string& speciesName, Habitat habitat, const string& diet, string feedingTimes, bool isFlyingMammal = false, bool canFly = false, const string& predators = "");
 
 	//SETTERS
 	void SetSpeciesName(const string& speciesName) override;
@@ -22,6 +22,7 @@ public:
 	void SetDiet(const string& diet) override;
 	void SetPredators(const string& predators) override;
 	void SetCanFly(bool canFly) override;
+	void SetFeedingTime(const string& feedingTimes) override;
 
 	//GETTERS
 	bool CanFly() const override;
