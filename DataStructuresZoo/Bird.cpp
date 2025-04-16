@@ -3,7 +3,7 @@
 #include "Bird.h"
 using namespace std;
 
-Bird::Bird(const string& speciesName, Habitat habitat, const string& diet,  bool canFly, string feedingTimes, const string& predators)
+Bird::Bird(const string& speciesName, Habitat habitat, const string& diet, string feedingTimes, bool canFly, const string& predators)
 {
 	SetSpeciesName(speciesName);
 	SetHabitat(habitat);
