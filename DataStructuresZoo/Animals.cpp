@@ -333,7 +333,52 @@ string PredatorsQuestion(string predators)
 	}
 	return predators;
 }
+void SearchTheBiome(vector<Animal*>& animals, const string& biomeName, const string& keyword) 
+{
+	cout << "\nSearching " << biomeName << " Biome...\n";
+	bool found = false;
 
+	for (const auto& animal : animals) 
+	{
+		if (animal == nullptr) continue; //Skips all null ptrs
+
+		if (animal->GetSpeciesName().find(keyword) != string::npos ||
+			animal->GetHabitat().find(keyword) != string::npos ||
+			animal->GetDiet().find(keyword) != string::npos ||
+			animal->GetFeedingTime().find(keyword) != string::npos ||
+			animal->GetPredators().find(keyword) != string::npos)
+		{
+			found = true;
+			cout << "\n ---- Animals Found ----\n";
+			cout << "Species Names: " << animal->GetSpeciesName() << endl;
+			cout << "Habitat: " << animal->GetHabitat() << endl;
+			cout << "Diet: " << animal->GetDiet() << endl;
+			cout << "Feeding Times: " << animal->GetFeedingTime() << endl;
+			cout << "Predators: " << animal->GetPredators() << endl;
+
+			if (IFly* flyingAnimal = dynamic_cast<IFly*>(animal))
+			{
+				cout << "Can Fly: " << (flyingAnimal->CanFly() ? "Yes" : "No") << endl;
+			}
+			if (Fish* fish = dynamic_cast<Fish*>(animal))
+			{
+				cout << "Water Type: " << fish->GetWaterType() << endl;
+			}
+		}
+	}
+    if (found == false)  
+    {  
+		cout << "\nNo animals found in the " << biomeName << " biome matching the keyword: " << keyword << endl;  
+    }
+}
+void SearchAnimalsThroughKeyword(const string& keyword, vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
+{
+	SearchTheBiome(jungleAnimals, "Jungle", keyword);
+	SearchTheBiome(desertAnimals, "Desert", keyword);
+	SearchTheBiome(forestAnimals, "Forest", keyword);
+	SearchTheBiome(arcticAnimals, "Arctic", keyword);
+	SearchTheBiome(aquaticAnimals, "Aquatic", keyword);
+}
 void DisplayAllAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
 
