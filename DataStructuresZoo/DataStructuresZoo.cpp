@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include "limits.h"
 #include <string>
 #include "ShowInfo.h"
 #include "Ticket.h"
@@ -9,9 +10,18 @@
 #include <vector>
 using namespace std;
 
+// Function to wait for a key press
+static void WaitForKeyPress()
+{
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	cout << "Press Enter to continue...";
+	std::cin.get();
+}
+
 int main()
 {
 	string filename = "C:\\Users\\Chpcu\\OneDrive\\Desktop\\W2025\\Advanced Data Structures\\DataStructuresZoo\\DataStructuresZoo\\Animals.txt";
+	string keyword;
 	//Animal Vectors to keep track of the animals + add them dynamically
 	vector<Animal*> jungleAnimals;
 	vector<Animal*> desertAnimals;
@@ -51,7 +61,8 @@ int main()
 		cout << "1: Display list of all tickets\n";
 		cout << "2: Enter a new animal into the zoo\n";
 		cout << "3: Display all current animals\n";
-		cout << "4: Exit the application\n";
+		cout << "4: Search using keyword\n";
+		cout << "5: Exit the application\n";
 		cout << "------------------------\n";
 
 		cout << "Enter your option:\n";
@@ -91,8 +102,15 @@ int main()
 		case 3:
 			//display
 			DisplayAllAnimals(jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
+			WaitForKeyPress();
 			break;
 		case 4:
+			std::cout << "Please enter your keyword search: \n";
+			cin >> keyword;
+			SearchAnimalsThroughKeyword(keyword, jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
+			WaitForKeyPress();
+			break;
+		case 5:
 			// close
 			ClearAnimals(jungleAnimals);
 			ClearAnimals(desertAnimals);
@@ -102,7 +120,7 @@ int main()
 			std::cout << "Goodbye! Closing the zoo...\n";
 			return 0;
 		default:
-			std::cout << "Enter a number from 0 to 3." << std::endl;
+			std::cout << "Enter a number from 0 to 5." << std::endl;
 		}
 		//loop menu
 	}
@@ -117,6 +135,7 @@ int main()
 	return 0;
 	
 }
+
 
 
 

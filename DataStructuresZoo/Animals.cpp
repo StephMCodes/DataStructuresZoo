@@ -335,7 +335,7 @@ string PredatorsQuestion(string predators)
 }
 void SearchTheBiome(vector<Animal*>& animals, const string& biomeName, const string& keyword) 
 {
-	cout << "Searching " << biomeName << " Biome...\n";
+	cout << "\nSearching " << biomeName << " Biome...\n";
 	bool found = false;
 
 	for (const auto& animal : animals) 
@@ -366,6 +366,10 @@ void SearchTheBiome(vector<Animal*>& animals, const string& biomeName, const str
 			}
 		}
 	}
+    if (found == false)  
+    {  
+		cout << "\nNo animals found in the " << biomeName << " biome matching the keyword: " << keyword << endl;  
+    }
 }
 void SearchAnimalsThroughKeyword(const string& keyword, vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals)
 {
