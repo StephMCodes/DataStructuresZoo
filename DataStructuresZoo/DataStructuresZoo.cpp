@@ -61,7 +61,7 @@ int main()
 		cout << "1: Display list of all tickets\n";
 		cout << "2: Enter a new animal into the zoo\n";
 		cout << "3: Display all current animals\n";
-		cout << "4: Search using keyword\n";
+		cout << "4: Search animals using keyword\n";
 		cout << "5: Exit the application\n";
 		cout << "------------------------\n";
 

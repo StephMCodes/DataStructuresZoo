@@ -20,4 +20,4 @@ Bird,Turquoise Tanager,Forest,Vegetarian,Afternoon;Yes,Raptors,Felines,Snakes
 Mammal,Fennec Fox,Desert,Carnivore,Evening;No,Humans,Hyenas,Birds of Prey
 Mammal,Northwest African Cheetah,Desert,Carnivore,Morning,Evening;No,Humans
 Mammal,Jerboa,Desert,Carnivore,Evening;No,Humans,Jerboas,Foxes,Cats,Jackals,Small Owls,Snakes
-Mammals,Camel,Desert,Vegetarian,Afernoon;No,Grey Wolf
+Mammal,Camel,Desert,Vegetarian,Afernoon;No,Grey Wolf
