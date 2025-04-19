@@ -20,7 +20,7 @@ static void WaitForKeyPress()
 
 int main()
 {
-	string filename = "C:\\Users\\Chpcu\\OneDrive\\Desktop\\W2025\\Advanced Data Structures\\DataStructuresZoo\\DataStructuresZoo\\Animals.txt";
+	string filename = "./Animals.txt";
 	string keyword;
 	//Animal Vectors to keep track of the animals + add them dynamically
 	vector<Animal*> jungleAnimals;
