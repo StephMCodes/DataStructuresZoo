@@ -70,6 +70,9 @@ public:
 	// Add a new reservation to the list (memory managed with unique_ptr)
 	void EnterZooReservation(std::unique_ptr<Ticket> ticket) {
 		zooTicketReservations.push_back(std::move(ticket)); // Transfer ptr to the list
+		//move changes ownership of ptr into the list of tickets.
+		//that makes Ticket a nullptr which cleans memory
+		//we cant just copy the ticket in there cause then there would be double
 		std::cout << "Ticket reservation entered into the list." << std::endl;
 	}
 
@@ -107,6 +110,7 @@ public:
 
 		//null ptr
 		std::unique_ptr<Ticket> ticket = nullptr;
+		//we need it to exist outside of switch to access it in this scope for future lines such as name setting
 
 		std::cout << "What kind of ticket are you creating?\n";
 		std::cout << "------------------------\n";
@@ -160,7 +164,10 @@ public:
 
 		std::cout << "Enter client name: ";
 		std::getline(std::cin, name);
+		//getline is better because it doesnt stop at white spaces and ignores enter key
 
+		//arrow operator can access in a clean way the object thats being pointed to and its methods and properties
+		//(*ticket).SetClientName(name);
 		ticket->SetClientName(name);
 		EnterZooReservation(std::move(ticket));
 	}

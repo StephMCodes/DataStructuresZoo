@@ -20,6 +20,7 @@ static void WaitForKeyPress()
 
 int main()
 {
+	//relative file path
 	string filename = "./Animals.txt";
 	string keyword;
 	//Animal Vectors to keep track of the animals + add them dynamically
