@@ -43,6 +43,7 @@ public:
 	static string HabitatString(Habitat habitat);
 };
 
+//Extra Functions used for navigating the information of the vectors
 string PredatorsQuestion(string predators);
 void ClearAnimals(vector<Animal*>& animals);
 void SearchAnimalsThroughKeyword(const string& keyword, vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, vector<Animal*>& forestAnimals, vector<Animal*>& arcticAnimals, vector<Animal*>& aquaticAnimals);

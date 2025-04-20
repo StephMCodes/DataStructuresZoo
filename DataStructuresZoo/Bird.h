@@ -10,6 +10,7 @@ private:
 public:
 	Bird(const string& speciesName, Habitat habitat, const string& diet, string feedingTimes, bool canFly, const string& predators = "");
 
+	//SETTERS
 	void SetDiet(const string& diet) override;
 	void SetSpeciesName(const string& speciesName) override;
 	void SetHabitat(Habitat habitat) override;
@@ -17,7 +18,7 @@ public:
 	void SetCanFly(bool canFly) override;
 	void SetFeedingTime(const string& feedingTimes) override;
 
-
+	//RETURNS BOOL
 	bool CanFly() const override { return canFly; }
 };
 

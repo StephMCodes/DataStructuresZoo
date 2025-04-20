@@ -8,10 +8,10 @@ using namespace std;
 class Mammal : public Animal, public IFly
 {
 private:
+	//Private variables for flying mammals
 	bool canFly;
 	bool isFlyingMammal;
 	
-
 public:
 	//Constructor
 	Mammal(const string& speciesName, Habitat habitat, const string& diet, string feedingTimes, bool isFlyingMammal = false, bool canFly = false, const string& predators = "");

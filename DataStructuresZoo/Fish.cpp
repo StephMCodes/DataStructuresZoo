@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//WaterType to string
 string Fish::WaterTypeString(WaterType waterType)
 {
 	switch (waterType)

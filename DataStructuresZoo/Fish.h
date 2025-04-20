@@ -11,6 +11,7 @@ enum class WaterType
 class Fish : public Animal
 {
 private:
+	//Private variable just for Fish Object
 	WaterType waterType;
 public:
 	//Constructor
