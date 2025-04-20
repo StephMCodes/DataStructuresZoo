@@ -176,72 +176,115 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 
 	cout << "Enter the Diet of the animal: ";
 	std::getline(std::cin, diet);
-	
 
-    while (true) // Loop to ensure valid input for feeding amount
-    {
-    cout << "How many feeding times does this animal have?: ";
-    cin >> feedingAmount;
 
-    if (std::cin.good() && feedingAmount > 0) // Valid input check
-    {
-    std::cin.ignore(INT_MAX, '\n'); // Clear input buffer
-    break;
-    }
-    else
-    {
-    // Clear error flags and input buffer
-    std::cin.clear();
-    std::cin.ignore(INT_MAX, '\n');
-    cout << "Invalid input! Please enter a positive integer for feeding amount.\n";
-    }
-    }
 
-    for (int i = 0; i < feedingAmount; i++)
-    {
-    while (true) // Loop to ensure valid input for feeding choice
-    {
-    cout << "Please Select the " << (i + 1) << " feeding time for the animal : ";
-    cout << "(1)Morning, (2)Afternoon, (3)Evening -- Please enter the number of the feeding time. ";
-    cin >> feedingChoice;
+	while (true) // Loop to ensure valid input for feeding amount
+	{
+		cout << "How many feeding times does this animal have?: ";
+		std::cin >> feedingAmount;
 
-    if (std::cin.good() && (feedingChoice >= 1 && feedingChoice <= 3)) // Valid input check
-    {
-    switch (feedingChoice)
-    {
-    case 1:
+		if (std::cin.good() && feedingAmount > 0) // Valid input check
+		{
+			std::cin.ignore(INT_MAX, '\n'); // Clear input buffer
+			break;
+		}
+		else
+		{
+			// Clear error flags and input buffer
+			std::cin.clear();
+			std::cin.ignore(INT_MAX, '\n');
+			cout << "Invalid input! Please enter a positive integer for feeding amount.\n";
+		}
+	}
+
+	for (int i = 0; i < feedingAmount; i++)
+	{
+		while (true) // Loop to ensure valid input for feeding choice
+		{
+			cout << "Please Select the " << (i + 1) << " feeding time for the animal : ";
+			cout << "(1)Morning, (2)Afternoon, (3)Evening -- Please enter the number of the feeding time. ";
+			std::cin >> feedingChoice;
+
+			if (std::cin.good() && (feedingChoice >= 1 && feedingChoice <= 3)) // Valid input check
+			{
+				switch (feedingChoice)
+				{
+				case 1:
 					feedingTimes += "Morning";
 					break;
-    case 2:
+				case 2:
 					feedingTimes += "Afternoon";
 					break;
-    case 3:
+				case 3:
 					feedingTimes += "Evening";
 					break;
-    }
-    // Add a comma between feeding times, but not at the end
-    if (i < feedingAmount - 1)
-    {
+				}
+				// Add a comma between feeding times, but not at the end
+				if (i < feedingAmount - 1)
+				{
 					feedingTimes += ",";
-    }
-    std::cin.ignore(INT_MAX, '\n'); // Clear input buffer
-    break;
-    }
-    else
-    {
-    // Clear error flags and input buffer
-    std::cin.clear();
-    std::cin.ignore(INT_MAX, '\n');
-    cout << "Invalid choice! Please enter a number between 1 and 3.\n";
-    }
-    }
-    }
-	//Makes sure input is correct before applying
-	while (!std::cin.good())
+				}
+				std::cin.ignore(INT_MAX, '\n'); // Clear input buffer
+				break;
+			}
+			else
+			{
+				// Clear error flags and input buffer
+				std::cin.clear();
+				std::cin.ignore(INT_MAX, '\n');
+				cout << "Invalid choice! Please enter a number between 1 and 3.\n";
+			}
+		}
+	}
+
+	while (true) // Loop to ensure valid input for habitat
 	{
-		//User Input for habitat
+		// User Input for habitat
 		cout << "Enter the habitat of the animal (0:Jungle, 1:Desert, 2:Forest, 3:Arctic, 4:Aquatic): ";
-		cin >> habitatChoice;
+		std::cin >> habitatChoice;
+
+		// Check if input is valid
+		if (std::cin.good() && (habitatChoice >= 0 && habitatChoice <= 4))
+		{
+			// Clear input buffer
+			std::cin.ignore(INT_MAX, '\n');
+
+			// Assign habitat based on choice
+			switch (habitatChoice)
+			{
+			case 0:
+				habitat = Habitat::Jungle;
+				break;
+			case 1:
+				habitat = Habitat::Desert;
+				break;
+			case 2:
+				habitat = Habitat::Forest;
+				break;
+			case 3:
+				habitat = Habitat::Arctic;
+				break;
+			case 4:
+				habitat = Habitat::Aquatic;
+				break;
+			}
+			break; // Exit loop after valid input
+		}
+		else
+		{
+			// Clear error flags and input buffer
+			std::cin.clear();
+			std::cin.ignore(INT_MAX, '\n');
+			cout << "Invalid input! Please enter a number between 0 and 4.\n";
+		}
+	}
+	//While loop for valid input of Animal Type
+	while (true)
+	{
+		cout << "Which Type of Animal? (0:Mammal, 1:Bird, 2:Fish): ";
+		std::cin >> speciesChoice;
+		std::cin.ignore(INT_MAX, '\n');
 		while (!std::cin.good()) {
 
 			//clear console error flag. needs the overloads
@@ -249,183 +292,118 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 			//clear console. needs the overloads
 			std::cin.ignore(INT_MAX, '\n');
 
-			std::cout << "Input a valid index of habitat:";
-			std::cin >> habitatChoice;
+			std::cout << "Invalid species choice: ";
+			std::cin >> speciesChoice;
 			std::cin.ignore(INT_MAX, '\n');
 		}
-		//std::cin.ignore(INT_MAX, '\n');
-
-		switch (habitatChoice)
-		{
-		case 0:
-			habitat = Habitat::Jungle;
-			break;
-		case 1:
-			habitat = Habitat::Desert;
-			break;
-		case 2:
-			habitat = Habitat::Forest;
-			break;
-		case 3:
-			habitat = Habitat::Arctic;
-			break;
-		case 4:
-			habitat = Habitat::Aquatic;
-			break;
-		default:
-			cout << "Invalid choice!" << endl;
-			continue; // Exit the function if the choice is invalid
-		}
-		break;
-	}
-
-	//While loop for valid input
-	while (true)
-	{
-		cout << "Which Type of Animal? (0:Mammal, 1:Bird, 2:Fish): ";
-		cin >> speciesChoice;
-		std::cin.ignore(INT_MAX, '\n');
 
 		char choice;
+
 		//Switch statement to add the animal to the correct habitat!
 		switch (speciesChoice)
 		{
 		case 0: //Mammals
-			//This will include all extra details for Mammals
-			cout << "Is this a flying mammal? (Y: yes, N: no): ";
-			cin >> choice;
-			std::cin.ignore(INT_MAX, '\n');
-
-			while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
+			while (true) // Loop to ensure valid input for flying mammal
 			{
-				cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no: ";
-				cin >> choice;
+				cout << "Is this a flying mammal? (Y: yes, N: no): ";
+				std::cin >> choice;
 				std::cin.ignore(INT_MAX, '\n');
-			}
-			isFlyingMammal = (choice == 'Y' || choice == 'y');
 
-			if (isFlyingMammal)
-			{
-				canFly = true;
+				if (choice == 'Y' || choice == 'y' || choice == 'N' || choice == 'n')
+				{
+					isFlyingMammal = (choice == 'Y' || choice == 'y');
+					canFly = isFlyingMammal;
+					break;
+				}
+				else
+				{
+					cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no.\n";
+				}
 			}
 
 			predators = PredatorsQuestion(predators);
 			newAnimal = new Mammal(speciesName, habitat, diet, feedingTimes, isFlyingMammal, canFly, predators);
-			switch (habitat)
-			{
-			case Habitat::Jungle:
-				jungleAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Forest:
-				forestAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Desert:
-				desertAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Aquatic:
-				aquaticAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Arctic:
-				arcticAnimals.push_back(newAnimal);
-				break;
-			default:
-				cout << "Invalid habitat selection!" << endl;
-				delete newAnimal; // Clean up memory if habitat is invalid  
-				break;
-			}
+
 			break;
 
 		case 1: //Birds
-			cout << "Can this animal fly? (Y:yes, N:no): ";
-			cin >> choice;
-			std::cin.ignore(INT_MAX, '\n');
-
-			while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
+			while (true) // Loop to ensure valid input for flying bird
 			{
-				cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no: ";
-				cin >> choice;
+				cout << "Can this animal fly? (Y:yes, N:no): ";
+				std::cin >> choice;
 				std::cin.ignore(INT_MAX, '\n');
+
+				if (choice == 'Y' || choice == 'y' || choice == 'N' || choice == 'n')
+				{
+					canFly = (choice == 'Y' || choice == 'y');
+					break;
+				}
+				else
+				{
+					cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no.\n";
+				}
 			}
-			canFly = (choice == 'Y' || choice == 'y');
 
 			predators = PredatorsQuestion(predators);
 			newAnimal = new Bird(speciesName, habitat, diet, feedingTimes, canFly, predators);
-			switch (habitat)
-			{
-			case Habitat::Jungle:
-				jungleAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Forest:
-				forestAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Desert:
-				desertAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Aquatic:
-				aquaticAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Arctic:
-				arcticAnimals.push_back(newAnimal);
-				break;
-			default:
-				cout << "Invalid habitat selection!" << endl;
-				delete newAnimal; // Clean up memory if habitat is invalid  
-				break;
-			}
+
 			break;
 
 		case 2: //Fish
-			cout << "Enter the Water Type of the fish (0:Freshwater, 1:Saltwater): ";
-			cin >> waterTypeChoice;
-			std::cin.ignore(INT_MAX, '\n');
-
-			switch (waterTypeChoice)
+			while (true) // Loop to ensure valid input for water type
 			{
-			case 0:
-				waterType = WaterType::FreshWater;
-				break;
-			case 1:
-				waterType = WaterType::SaltWater;
-				break;
-			default:
-				cout << "Invalid choice!" << endl;
-				continue; // Exit the function if the choice is invalid
+				cout << "Enter the Water Type of the fish (0:Freshwater, 1:Saltwater): ";
+				std::cin >> waterTypeChoice;
+				if (std::cin.good() && (waterTypeChoice == 0 || waterTypeChoice == 1)) // Valid input check
+				{
+					waterType = (waterTypeChoice == 0) ? WaterType::FreshWater : WaterType::SaltWater;
+					std::cin.ignore(INT_MAX, '\n'); // Clear input buffer
+					break;
+				}
+				else
+				{
+					// Clear error flags and input buffer
+					std::cin.clear();
+					std::cin.ignore(INT_MAX, '\n');
+					cout << "Invalid input. Please enter 0 for Freshwater or 1 for Saltwater.\n";
+				}
 			}
+
 			predators = PredatorsQuestion(predators);
 			newAnimal = new Fish(speciesName, habitat, diet, feedingTimes, waterType, predators);
-			switch (habitat)
-			{
-			case Habitat::Jungle:
-				jungleAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Forest:
-				forestAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Desert:
-				desertAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Aquatic:
-				aquaticAnimals.push_back(newAnimal);
-				break;
-			case Habitat::Arctic:
-				arcticAnimals.push_back(newAnimal);
-				break;
-			default:
-				cout << "Invalid habitat selection!" << endl;
-				delete newAnimal; // Clean up memory if habitat is invalid  
-				break;
-			}
+
 			break;
 
 		default:
-			cout << "Invalid species choice!" << endl;
+			cout << "Invalid species choice: " << endl;
 			continue;
 		}
 
+		switch (habitat)
+		{
+		case Habitat::Jungle:
+			jungleAnimals.push_back(newAnimal);
+			break;
+		case Habitat::Forest:
+			forestAnimals.push_back(newAnimal);
+			break;
+		case Habitat::Desert:
+			desertAnimals.push_back(newAnimal);
+			break;
+		case Habitat::Aquatic:
+			aquaticAnimals.push_back(newAnimal);
+			break;
+		case Habitat::Arctic:
+			arcticAnimals.push_back(newAnimal);
+			break;
+		default:
+			cout << "Invalid habitat selection!" << endl;
+			//delete newAnimal; // Clean up memory if habitat is invalid  
+			break;
+		}
 		if (newAnimal != nullptr)
 		{
 			cout << speciesName << " was added to the " << newAnimal->GetHabitat() << " habitat!" << endl;
-			break;
 		}
 		return;
 	}
@@ -437,7 +415,7 @@ string PredatorsQuestion(string predators)
 	string predatorName = "";
 
 	cout << "How many predators?: ";
-	cin >> count;
+	std::cin >> count;
 	std::cin.ignore(INT_MAX, '\n');
 
 	if (count == 0)
@@ -531,7 +509,7 @@ void SearchAnimalsThroughKeyword(const string& keyword, vector<Animal*>& jungleA
 	{
 		int choice;
 		cout << "Which Biome would you like to search through?(0:Jungle, 1:Desert, 2:Forest, 3:Arctic, 4:Aquatic, 5:All of them):";
-		cin >> choice;
+		std::cin >> choice;
 		std::cin.ignore(INT_MAX, '\n');
 
 		switch (choice)
