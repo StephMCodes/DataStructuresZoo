@@ -69,6 +69,7 @@ int main()
 		cout << "Enter your option:\n";
 		std::cin >> menuChoice;
 		//we dont want the user to send further input with white spaces and other strings
+		
 		std::cin.ignore(INT_MAX, '\n');
 		//std::cin.ignore();
 		//check ignore
@@ -80,7 +81,7 @@ int main()
 			//clear console error flag. needs the overloads
 			std::cin.clear();
 			//clear console. needs the overloads
-			std::cin.ignore(INT_MAX, '\n');
+			//std::cin.ignore(INT_MAX, '\n');
 
 			std::cout << "Invalid input. Please enter a number between 0 and 5.\n";
 			std::cin >> menuChoice;
@@ -109,7 +110,7 @@ int main()
 			break;
 		case 4:
 			std::cout << "Please enter your keyword search: \n";
-			cin >> keyword;
+			std::getline(cin, keyword);
 			SearchAnimalsThroughKeyword(keyword, jungleAnimals, desertAnimals, forestAnimals, arcticAnimals, aquaticAnimals);
 			WaitForKeyPress();
 			break;

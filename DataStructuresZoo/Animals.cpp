@@ -180,7 +180,18 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 
 	cout << "How many feeding times does this animal have?: ";
 	cin >> feedingAmount;
-	std::cin.ignore(INT_MAX, '\n');
+	while (!std::cin.good()) {
+
+		//clear console error flag. needs the overloads
+		std::cin.clear();
+		//clear console. needs the overloads
+		std::cin.ignore(INT_MAX, '\n');
+
+		std::cout << "Input a valid amount of feeding: ";
+		std::cin >> feedingAmount;
+		std::cin.ignore(INT_MAX, '\n');
+	}
+	//std::cin.ignore(INT_MAX, '\n');
 
 	//This determines if there are multiple feeding times as some animals do get fed more then once!
 	for (int i = 0; i < feedingAmount; i++)
@@ -223,7 +234,18 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 		//User Input for habitat
 		cout << "Enter the habitat of the animal (0:Jungle, 1:Desert, 2:Forest, 3:Arctic, 4:Aquatic): ";
 		cin >> habitatChoice;
-		std::cin.ignore(INT_MAX, '\n');
+		while (!std::cin.good()) {
+
+			//clear console error flag. needs the overloads
+			std::cin.clear();
+			//clear console. needs the overloads
+			std::cin.ignore(INT_MAX, '\n');
+
+			std::cout << "Input a valid index of habitat:";
+			std::cin >> habitatChoice;
+			std::cin.ignore(INT_MAX, '\n');
+		}
+		//std::cin.ignore(INT_MAX, '\n');
 
 		switch (habitatChoice)
 		{
