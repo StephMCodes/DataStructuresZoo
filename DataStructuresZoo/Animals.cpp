@@ -176,60 +176,68 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 
 	cout << "Enter the Diet of the animal: ";
 	std::getline(std::cin, diet);
-	//cin.ignore();
+	
 
-	cout << "How many feeding times does this animal have?: ";
-	cin >> feedingAmount;
-	while (!std::cin.good()) {
+    while (true) // Loop to ensure valid input for feeding amount
+    {
+    cout << "How many feeding times does this animal have?: ";
+    cin >> feedingAmount;
 
-		//clear console error flag. needs the overloads
-		std::cin.clear();
-		//clear console. needs the overloads
-		std::cin.ignore(INT_MAX, '\n');
+    if (std::cin.good() && feedingAmount > 0) // Valid input check
+    {
+    std::cin.ignore(INT_MAX, '\n'); // Clear input buffer
+    break;
+    }
+    else
+    {
+    // Clear error flags and input buffer
+    std::cin.clear();
+    std::cin.ignore(INT_MAX, '\n');
+    cout << "Invalid input! Please enter a positive integer for feeding amount.\n";
+    }
+    }
 
-		std::cout << "Input a valid amount of feeding: ";
-		std::cin >> feedingAmount;
-		std::cin.ignore(INT_MAX, '\n');
-	}
-	//std::cin.ignore(INT_MAX, '\n');
+    for (int i = 0; i < feedingAmount; i++)
+    {
+    while (true) // Loop to ensure valid input for feeding choice
+    {
+    cout << "Please Select the " << (i + 1) << " feeding time for the animal : ";
+    cout << "(1)Morning, (2)Afternoon, (3)Evening -- Please enter the number of the feeding time. ";
+    cin >> feedingChoice;
 
-	//This determines if there are multiple feeding times as some animals do get fed more then once!
-	for (int i = 0; i < feedingAmount; i++)
-	{
-		//While loop makes sure the user will enter a valid input
-		while (true)
-		{
-			cout << "Please Select the " << (i + 1) << " feeding time for the animal : \n";
-			cout << "(1)Morning, (2)Afternoon, (3)Evening -- Please enter the number of the feeding time.\n";
-			cin >> feedingChoice;
-			std::cin.ignore(INT_MAX, '\n');
-
-			switch (feedingChoice)
-			{
-			case 1:
-				feedingTimes += "Morning";
-				break;
-			case 2:
-				feedingTimes += "Afternoon";
-				break;
-			case 3:
-				feedingTimes += "Evening";
-				break;
-			default:
-				cout << "You did not make a proper selection!\n";
-				continue;
-			}
-			//Makes sure that there is a comma between the times, and not one at the end!
-			if (i >= 0 && i < feedingAmount - 1)
-			{
-				feedingTimes += ",";
-			}
-			break;
-		}
-	}
-
+    if (std::cin.good() && (feedingChoice >= 1 && feedingChoice <= 3)) // Valid input check
+    {
+    switch (feedingChoice)
+    {
+    case 1:
+					feedingTimes += "Morning";
+					break;
+    case 2:
+					feedingTimes += "Afternoon";
+					break;
+    case 3:
+					feedingTimes += "Evening";
+					break;
+    }
+    // Add a comma between feeding times, but not at the end
+    if (i < feedingAmount - 1)
+    {
+					feedingTimes += ",";
+    }
+    std::cin.ignore(INT_MAX, '\n'); // Clear input buffer
+    break;
+    }
+    else
+    {
+    // Clear error flags and input buffer
+    std::cin.clear();
+    std::cin.ignore(INT_MAX, '\n');
+    cout << "Invalid choice! Please enter a number between 1 and 3.\n";
+    }
+    }
+    }
 	//Makes sure input is correct before applying
-	while (true)
+	while (!std::cin.good())
 	{
 		//User Input for habitat
 		cout << "Enter the habitat of the animal (0:Jungle, 1:Desert, 2:Forest, 3:Arctic, 4:Aquatic): ";
@@ -456,13 +464,13 @@ void SearchTheBiome(vector<Animal*>& animals, const string& biomeName, const str
 {
 	// Convert the keyword to lowercase
 	string lowerKeyword = keyword;
-    transform(lowerKeyword.begin(), lowerKeyword.end(), lowerKeyword.begin(), ::tolower);   
-	/*   
-    The `begin()` and `end()` iterators define the range of the string to be transformed.  
-    The first `lowerKeyword.begin()` specifies the start of the range, and the second `lowerKeyword.begin()` specifies where the transformed characters will be stored (in-place transformation).  
-    The `::tolower` function is applied to each character in the range, converting uppercase letters to their lowercase equivalents.  
-    This ensures that the keyword comparison is case-insensitive when searching for matches in the animal data.  
-    */
+	transform(lowerKeyword.begin(), lowerKeyword.end(), lowerKeyword.begin(), ::tolower);
+	/*
+	The `begin()` and `end()` iterators define the range of the string to be transformed.
+	The first `lowerKeyword.begin()` specifies the start of the range, and the second `lowerKeyword.begin()` specifies where the transformed characters will be stored (in-place transformation).
+	The `::tolower` function is applied to each character in the range, converting uppercase letters to their lowercase equivalents.
+	This ensures that the keyword comparison is case-insensitive when searching for matches in the animal data.
+	*/
 
 	//This searches the specific Biome
 	cout << "\nSearching " << biomeName << " Biome...\n";
@@ -529,19 +537,19 @@ void SearchAnimalsThroughKeyword(const string& keyword, vector<Animal*>& jungleA
 		switch (choice)
 		{
 		case 0:
-			SearchTheBiome(jungleAnimals, "Jungle", keyword); 
+			SearchTheBiome(jungleAnimals, "Jungle", keyword);
 			break;
-		case 1: 
-			SearchTheBiome(desertAnimals, "Desert", keyword); 
+		case 1:
+			SearchTheBiome(desertAnimals, "Desert", keyword);
 			break;
 		case 2:
-			SearchTheBiome(forestAnimals, "Forest", keyword); 
+			SearchTheBiome(forestAnimals, "Forest", keyword);
 			break;
 		case 3:
-			SearchTheBiome(arcticAnimals, "Arctic", keyword); 
+			SearchTheBiome(arcticAnimals, "Arctic", keyword);
 			break;
 		case 4:
-			SearchTheBiome(aquaticAnimals, "Aquatic", keyword); 
+			SearchTheBiome(aquaticAnimals, "Aquatic", keyword);
 			break;
 		case 5:
 			SearchTheBiome(jungleAnimals, "Jungle", keyword);
