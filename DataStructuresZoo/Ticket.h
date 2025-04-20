@@ -122,7 +122,7 @@ public:
 		//loop asking until we break out with a correct answer
 		while (true) {
 			std::cin >> choice;
-			std::cin.ignore();
+			std::cin.ignore(INT_MAX, '\n');
 			//check ignore
 
 			// take input and validate

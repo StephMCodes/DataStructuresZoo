@@ -170,16 +170,17 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 
 	//User input
 	cout << "Enter the Species Name of the animal: ";
-	cin >> speciesName;
-	cin.ignore();
+	std::getline(std::cin, speciesName);
+	//getline is better because it doesnt stop at white spaces and ignores enter key
+	//cin.ignore();
 
 	cout << "Enter the Diet of the animal: ";
-	cin >> diet;
-	cin.ignore();
+	std::getline(std::cin, diet);
+	//cin.ignore();
 
 	cout << "How many feeding times does this animal have?: ";
 	cin >> feedingAmount;
-	cin.ignore();
+	std::cin.ignore(INT_MAX, '\n');
 
 	//This determines if there are multiple feeding times as some animals do get fed more then once!
 	for (int i = 0; i < feedingAmount; i++)
@@ -190,6 +191,7 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 			cout << "Please Select the " << (i + 1) << " feeding time for the animal : \n";
 			cout << "(1)Morning, (2)Afternoon, (3)Evening -- Please enter the number of the feeding time.\n";
 			cin >> feedingChoice;
+			std::cin.ignore(INT_MAX, '\n');
 
 			switch (feedingChoice)
 			{
@@ -221,7 +223,7 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 		//User Input for habitat
 		cout << "Enter the habitat of the animal (0:Jungle, 1:Desert, 2:Forest, 3:Arctic, 4:Aquatic): ";
 		cin >> habitatChoice;
-		cin.ignore();
+		std::cin.ignore(INT_MAX, '\n');
 
 		switch (habitatChoice)
 		{
@@ -252,7 +254,7 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 	{
 		cout << "Which Type of Animal? (0:Mammal, 1:Bird, 2:Fish): ";
 		cin >> speciesChoice;
-		cin.ignore();
+		std::cin.ignore(INT_MAX, '\n');
 
 		char choice;
 		//Switch statement to add the animal to the correct habitat!
@@ -262,13 +264,13 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 			//This will include all extra details for Mammals
 			cout << "Is this a flying mammal? (Y: yes, N: no): ";
 			cin >> choice;
-			cin.ignore();
+			std::cin.ignore(INT_MAX, '\n');
 
 			while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
 			{
 				cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no: ";
 				cin >> choice;
-				cin.ignore();
+				std::cin.ignore(INT_MAX, '\n');
 			}
 			isFlyingMammal = (choice == 'Y' || choice == 'y');
 
@@ -306,13 +308,13 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 		case 1: //Birds
 			cout << "Can this animal fly? (Y:yes, N:no): ";
 			cin >> choice;
-			cin.ignore();
+			std::cin.ignore(INT_MAX, '\n');
 
 			while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n')
 			{
 				cout << "Invalid choice! Please enter 'Y' for yes, or 'N' for no: ";
 				cin >> choice;
-				cin.ignore();
+				std::cin.ignore(INT_MAX, '\n');
 			}
 			canFly = (choice == 'Y' || choice == 'y');
 
@@ -345,7 +347,7 @@ void AddAnimals(vector<Animal*>& jungleAnimals, vector<Animal*>& desertAnimals, 
 		case 2: //Fish
 			cout << "Enter the Water Type of the fish (0:Freshwater, 1:Saltwater): ";
 			cin >> waterTypeChoice;
-			cin.ignore();
+			std::cin.ignore(INT_MAX, '\n');
 
 			switch (waterTypeChoice)
 			{
@@ -406,7 +408,7 @@ string PredatorsQuestion(string predators)
 
 	cout << "How many predators?: ";
 	cin >> count;
-	cin.ignore();
+	std::cin.ignore(INT_MAX, '\n');
 
 	if (count == 0)
 	{
@@ -417,8 +419,8 @@ string PredatorsQuestion(string predators)
 		for (int i = 0; i < count; i++)
 		{
 			cout << "Enter Predator " << i + 1 << ": ";
-			cin >> predatorName;
-			cin.ignore();
+			//cin >> predatorName;
+			getline(std::cin, predatorName);
 			predators += predatorName;
 			if (i < count - 1) // Add a comma if it's not the last predator
 			{
@@ -500,6 +502,7 @@ void SearchAnimalsThroughKeyword(const string& keyword, vector<Animal*>& jungleA
 		int choice;
 		cout << "Which Biome would you like to search through?(0:Jungle, 1:Desert, 2:Forest, 3:Arctic, 4:Aquatic, 5:All of them):";
 		cin >> choice;
+		std::cin.ignore(INT_MAX, '\n');
 
 		switch (choice)
 		{

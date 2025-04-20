@@ -68,21 +68,23 @@ int main()
 
 		cout << "Enter your option:\n";
 		std::cin >> menuChoice;
-		std::cin.ignore();
+		//we dont want the user to send further input with white spaces and other strings
+		std::cin.ignore(INT_MAX, '\n');
+		//std::cin.ignore();
 		//check ignore
 
 		// take input and validate
 		//validation may need editing in future
-		while (!std::cin.good() || menuChoice < 0 || menuChoice > 4) {
+		while (!std::cin.good() || menuChoice < 0 || menuChoice > 5) {
 
 			//clear console error flag. needs the overloads
 			std::cin.clear();
 			//clear console. needs the overloads
 			std::cin.ignore(INT_MAX, '\n');
 
-			std::cout << "Invalid input. Please enter a number between 0 and 3.\n";
+			std::cout << "Invalid input. Please enter a number between 0 and 5.\n";
 			std::cin >> menuChoice;
-			std::cin.ignore();
+			std::cin.ignore(INT_MAX, '\n');
 		}
 		//input is valid!
 
