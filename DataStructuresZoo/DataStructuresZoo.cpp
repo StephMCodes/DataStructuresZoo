@@ -2,12 +2,15 @@
 #include <iostream>
 #include "limits.h"
 #include <string>
+#include <vector>
+#include <map>
 #include "ShowInfo.h"
 #include "Ticket.h"
 #include "Animals.h"
 #include "Mammal.h"
 #include "IFly.h"
-#include <vector>
+
+
 using namespace std;
 
 // Function to wait for a key press
@@ -29,6 +32,27 @@ int main()
 	vector<Animal*> forestAnimals;
 	vector<Animal*> arcticAnimals;
 	vector<Animal*> aquaticAnimals;
+
+	//map shows 1 per biome
+	/*map<Habitat, vector<ShowInfo>> biomeShows; 
+	
+	{
+		ShowInfo jungleShow(10, 12, "Sassy Birdies", "Jungle Dome", 4);
+		biomeShows[Habitat::Jungle].push_back(jungleShow);
+
+		ShowInfo desertShow(11, 13, "Hi-enas Delight", "Desert Arena", 3);
+		biomeShows[Habitat::Desert].push_back(desertShow);
+
+		ShowInfo forestShow(12, 14, "Lion King Who", "Forest Clearing", 5);
+		biomeShows[Habitat::Forest].push_back(forestShow);
+
+		ShowInfo arcticShow(13, 15, "Penguin Stampede", "Arctic Circle", 4);
+		biomeShows[Habitat::Arctic].push_back(arcticShow);
+
+		ShowInfo aquaticShow(14, 16, "Eerie Dolphin Sways", "Aquatic Arena", 5);
+		biomeShows[Habitat::Aquatic].push_back(aquaticShow);
+	}*/
+
 
 	TicketList allClients;
 
@@ -94,6 +118,7 @@ int main()
 		case 0:
 			//enter new client
 			allClients.AddTicket();
+			//allClients.AddTicket(biomeShows);//failed attempt
 			break;
 		case 1:
 			//display tickets
@@ -142,23 +167,5 @@ int main()
 
 
 
-
-//unique_ptr<VIPTicket> vipTicket = make_unique<VIPTicket>();
-//vipTicket->SetClientName("Ellen Rivers");
-////(*vipTicket).SetClientName("Ellen Rivers"); other option via dereferencing
-////-> is shorthand for (*vipTicket) its an operator to help with dereferencng inside a pointer
-//allClients.EnterZooReservation(move(vipTicket));
-
-//unique_ptr<FamilyTicket> familyTicket = make_unique<FamilyTicket>();
-//familyTicket->SetClientName("Brennan Berkley");
-//allClients.EnterZooReservation(move(familyTicket));
-
-//unique_ptr<StudentElderTicket> studentTicket = make_unique<StudentElderTicket>();
-//studentTicket->SetClientName("Melissa Adams");
-//allClients.EnterZooReservation(move(studentTicket));
-
-//unique_ptr<BasicTicket> basicTicket = make_unique<BasicTicket>();
-//basicTicket->SetClientName("John Doe");
-//allClients.EnterZooReservation(move(basicTicket));
 
 

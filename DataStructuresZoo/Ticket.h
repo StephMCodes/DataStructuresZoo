@@ -2,9 +2,15 @@
 #include <iostream>
 #include <string>
 #include <queue>
-
+#include <map>
+#include <vector>
 #include <list>
 #include <memory>
+#include "Animals.h"
+
+
+
+using namespace std;
 
 
 
@@ -14,7 +20,7 @@ protected: //encapsulation
 	//Ticket (VIP, family, basic)
 	std::string type;
 	int price;
-	std::string clientName; 
+	std::string clientName;
 
 	//constructor is protected so it is abstract
 	Ticket(const std::string& type, int price, std::string clientName)
@@ -29,6 +35,12 @@ public:
 	void SetClientName(const std::string& name) {
 		clientName = name;
 	}
+
+	////GETTER	
+	//const std::string& GetClientName() const
+	//{
+	//	return clientName;
+	//}
 
 	//display method
 	//a simple read-only displaying method that needs to be public so it can be used
@@ -60,12 +72,12 @@ struct BasicTicket : Ticket
 
 struct TicketList {
 private:
-	std::list<std::unique_ptr<Ticket>> zooTicketReservations;
+	list<unique_ptr<Ticket>> zooTicketReservations;
 	//we use smart pointers to have simpler memory management
 
 	//this is where all clients are stored, there is a list for the ones in each biome
 	//that are visiting the show and one for all clients
-
+	
 public:
 	// Add a new reservation to the list (memory managed with unique_ptr)
 	void EnterZooReservation(std::unique_ptr<Ticket> ticket) {
@@ -101,7 +113,7 @@ public:
 		zooTicketReservations.clear(); // Automatically cleans up memory via unique_ptr
 		std::cout << "All zoo reservations cleared." << std::endl;
 	}
-
+	//std::map<Habitat, std::vector<ShowInfo>>& biomeShows
 	void AddTicket()
 	{
 		//user input for ticket
@@ -170,6 +182,20 @@ public:
 		//(*ticket).SetClientName(name);
 		ticket->SetClientName(name);
 		EnterZooReservation(std::move(ticket));
+
+		////biome prompt
+		//int biomeChoice;
+		//std::cout << "Select biome (0:Jungle 1:Desert 2:Forest 3:Arctic 4:Aquatic): ";
+		//std::cin >> biomeChoice; std::cin.ignore(INT_MAX, '\n');
+		//Habitat h = (Habitat)biomeChoice;
+
+		//// store to list--> then get raw pointer
+		//Ticket* rawPtr = ticket.get();
+		//EnterZooReservation(std::move(ticket));
+
+		////queue into show
+		//biomeShows[h][0].QueuePerson(rawPtr);
+		//std::cout << name << " queued into the " << Animal::HabitatString(h) << " show.\n";
 	}
 };
 
