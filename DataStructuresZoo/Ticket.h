@@ -14,7 +14,7 @@ protected: //encapsulation
 	//Ticket (VIP, family, basic)
 	std::string type;
 	int price;
-	std::string clientName; //TO FIX AT SOME POINT (REFERENCES ANIMALS)
+	std::string clientName; 
 
 	//constructor is protected so it is abstract
 	Ticket(const std::string& type, int price, std::string clientName)
